@@ -5,5 +5,5 @@ from jot import views
 app_name = 'jot'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('search/', views.search, name='search'),
 ]
