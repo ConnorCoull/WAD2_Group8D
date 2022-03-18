@@ -12,8 +12,12 @@ def getRatings(title):
     # send a request and get a JSON response
     resp = urlopen(api + title)
     # parse JSON into Python as a dictionary
-    book_data = json.load(resp)
+    results = json.load(resp)
+    
+    #Return a default value if there are no results 
+    if results["totalItems"] == 0:
+        return [0,0]
 
     #Get the info for the first book from the query 
-    volume_info = book_data["items"][0]["volumeInfo"]
-    return [volume_info['averageRating'],volume_info['ratingsCount']]
+    bookInfo = results["items"][0]["volumeInfo"]
+    return [bookInfo['averageRating'],bookInfo['ratingsCount']]
