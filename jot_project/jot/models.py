@@ -1,6 +1,7 @@
 from django.db import models 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
+import uuid
 
 # This is unfinished, I'll come back to it and finish it later
 # Note that the rest of my comments are things I've put here so I can come and fix them later
@@ -27,6 +28,7 @@ class Book(models.Model):
     book_title = models.CharField(max_length=30)
     author = models.CharField(max_length=32)
     book_description = models.CharField(max_length=250)
+    uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     #book_id = models.IntegerField(unique=True)
     book_average_rating = models.PositiveIntegerField(
@@ -38,7 +40,6 @@ class Book(models.Model):
     ) # The book can only be rated between 1-5, so the rating will be between these numbers
     book_file_path = models.CharField(max_length=128)
     book_views = models.IntegerField(default=0)
-    uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
 
     def __str__(self):
         return self.book_title
@@ -48,7 +49,7 @@ class Book(models.Model):
         verbose_name_plural = 'Books'
 
 class Review(models.Model):
-    #review_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE)
+    review_id = models.CharField(primary_key=True, editable=False)
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
     reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     #review_id = models.IntegerField(unique=True)
