@@ -131,7 +131,6 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [STATIC_DIR,]
 
-STATIC_ROOT = STATIC_DIR
 STATIC_URL = '/static/'
 
 # Default primary key field type

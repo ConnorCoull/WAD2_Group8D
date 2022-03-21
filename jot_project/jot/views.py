@@ -43,3 +43,7 @@ def about(request):
     return render(request, 'jot/about.html')
     #return HttpResponse("<h1>JOT</h1><p>This is the about page</p><a href='/jot/'>Index</a>")
 
+def contactus(request):
+    #maybe a dictionary of our information would be useful
+    return render(request, 'jot/contactus.html')
+

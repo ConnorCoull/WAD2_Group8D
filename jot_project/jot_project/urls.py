@@ -24,4 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('jot/', include('jot.urls')),
-] + static(settings.STATIC_DIR, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_DIR, document_root=settings.MEDIA_ROOT)
