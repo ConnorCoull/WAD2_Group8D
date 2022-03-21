@@ -2,9 +2,16 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 import uuid
+from turtle import title
 
 # This is unfinished, I'll come back to it and finish it later
 # Note that the rest of my comments are things I've put here so I can come and fix them later
+class Post(models.Model):
+    title= models.CharField(max_length=50)
+    body= models.TextField()
+
+    def __str__(self) -> str:
+        return super().__str__()
 
 class Users(models.Model):
     #Not sure if user gets its own model but I've made it here anyway, can always remove it
@@ -49,7 +56,7 @@ class Book(models.Model):
         verbose_name_plural = 'Books'
 
 class Review(models.Model):
-    review_id = models.CharField(primary_key=True, editable=False)
+    review_id = models.CharField(max_length=256, primary_key=True, editable=False)
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
     reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     #review_id = models.IntegerField(unique=True)
