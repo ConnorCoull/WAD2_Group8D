@@ -1,0 +1,25 @@
+{% extends 'jot/base.html' %}
+{% load staticfiles %}
+{% block title_block%}
+  Home
+{% endblock %}
+{% block body_block %}
+        <div id="search-bar">
+            <div id="search-bar-button">Search Bar</div>
+        </div>
+        <div class="name-block">
+          <strong>Top Reads:</strong>
+          {% if pages %}
+          <ul class="books-list">
+            {% for page in pages %}
+            <li>
+              <a href="{{ book.url }}">{{ book.title }}</a>
+            </li>
+            {% endfor %}
+          {% else %}
+          <strong>There are no pages present</strong>
+          {% endif %}
+          </ul>
+        </div>
+      </div>
+{% endblock %}

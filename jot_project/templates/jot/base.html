@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+  <head>
+    <title>
+        JOT - {% block title_block %}Sharing Worldwide{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  <body>
+    <div class="logo"><h1>JOT</h1></div>
+    <div class="bar" id="bar-one">
+      <div id="login-block">Login stuff here</div>
+    </div>
+      <div class="bar" id="bar-two">
+        <ul class="navbar">
+        <li class="linkli"><a class="navlink" href="{% url 'jot:about' %}">About</a></li>
+            <li class="linkli"><a class="navlink" href="{% url 'jot:contactus' %}">Contact Us</a></li>
+            <li class="linkli"><a class="navlink" href="about">About</a></li>
+            <li class="linkli"><a class="navlink" href="about">About</a></li>
+        </ul>
+      </div>
+      <div class="vertical-bar" id="vertical-bar-one">?</div>
+      <div class="vertical-bar" id="vertical-bar-two">?</div>
+      <!-- above is all header block-->
+      <div id="main">
+          {% block body_block %}
+          {% endblock %}
+      </div>
+    <!-- below this is the footer block-->
+    <div id="footer">JOT&trade; does not claim responsibility for any copyright infringement, press <kbd>Win</kdb> + <kbd>Ctrl</kbd> + <kbd>J</kbd> to open up the developer console.</div>
+  </body>
+</html>
