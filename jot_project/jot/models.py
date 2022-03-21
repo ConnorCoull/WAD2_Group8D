@@ -1,11 +1,6 @@
-from django.db import models 
-from django.core.validators import MaxValueValidator, MinValueValidator
-from django.contrib.auth.models import User
-import uuid
+
 from turtle import title
-
-
-
+from django.db import models
 
 # Create your models here.
 class Post(models.Model):
@@ -14,6 +9,14 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return super().__str__()
+
+        
+
+from django.db import models 
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
+import uuid
+from turtle import title
 
 # This is unfinished, I'll come back to it and finish it later
 # Note that the rest of my comments are things I've put here so I can come and fix them later
