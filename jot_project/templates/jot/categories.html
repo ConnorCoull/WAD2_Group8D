@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-
-
-<html>
-    <head>
-        <title>
-            JOT
-        </title>
-    </head>
-    <body>
-        <div><h1>JOT<h1> remember the o is an on-click event to load a random page</div>
-        <div>Login stuff here</div>
-        <div>Page links here</div>
-        <div>the sidebar goes here, maybe needs 2 divs</div>
-        <div>remember and use css to make this work on laptop and mobile if possible</div>
-        <!-- above is all header block-->
-        <div>This is close to the rango stuff, where for each category we display an elt on a list that takes you to the category page, needs slugify</div>
-        <!-- below this is the footer block-->
-        <div>Footer</div>
-    </body>
-</html>
+{% extends 'jot/base.html' %} {% load static %} {% block title_block %}
+Categories {%endblock %} {% block body_block %}
+<h1 class="h1-title-block">Category is: You Choose!</h1>
+<p class="main-paragraph">
+  This will display links to our categories, each of which will feature pages
+  relevant to that category
+</p>
+{% endblock %}

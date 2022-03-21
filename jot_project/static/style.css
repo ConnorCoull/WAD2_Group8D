@@ -60,9 +60,9 @@ body {
   position: absolute;
   z-index: 5;
   overflow: hidden;
-  height: 15%;
+  height: 10%;
   width: 10%;
-  top: 0.24%;
+  top: 2%;
   bottom: 0;
   right: 0;
   left: 5.1%; /*I know... 5.1... don't ask... padding maybe?*/
@@ -122,8 +122,8 @@ body {
   background-color: f4f4f4;
   padding-left: 2%;
   padding-right: 2%;
-  colour: black;
-  align: center;
+  color: black;
+  text-align: center;
   text-align: center;
 }
 

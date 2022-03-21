@@ -15,10 +15,10 @@
     </div>
     <div class="bar" id="bar-two">
     <ul class="navbar">
-    <li class="linkli"><a class="navlink" href="jot/about">About</a></li>
+        <li class="linkli"><a class="navlink" href="{% url 'jot:categories' %}">Categories</a></li>
+        <li class="linkli"><a class="navlink" href="{% url 'jot:surpriseme' %}">Surprise Me</a></li>
         <li class="linkli"><a class="navlink" href="{% url 'jot:contactus' %}">Contact Us</a></li>
-        <li class="linkli"><a class="navlink" href="about">About</a></li>
-        <li class="linkli"><a class="navlink" href="about">About</a></li>
+        <li class="linkli"><a class="navlink" href="{% url 'jot:about' %}">About</a></li>
     </ul>
     </div>
     <div class="vertical-bar" id="vertical-bar-one">?</div>
@@ -29,6 +29,6 @@
         {% endblock %}
     </div>
     <!-- below this is the footer block-->
-    <div id="footer">JOT&trade; does not claim responsibility for any copyright infringement, press <kbd>Ctrl</kdb> + <kbd>Shft</kbd> + <kbd>J</kbd> to open up the developer console.</div>
+    <div id="footer">JOT&trade; does not claim responsibility for any copyright infringement, press <kbd>Ctrl</kdb> + <kbd>Shft</kbd> + <kbd>J</kbd> to open up the developer console. Visits: {{ visits }}</div>
   </body>
 </html>
