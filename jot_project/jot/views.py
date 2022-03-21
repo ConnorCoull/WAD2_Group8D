@@ -6,7 +6,7 @@ from django.db.models import Q
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
-def search(request):
+def index(request):
     html='''
     <from>
         <form role="search" method="get" id="searchform" action="/search/">

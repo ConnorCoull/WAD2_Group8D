@@ -19,6 +19,6 @@ from jot import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.search, name='search'),
+    path('', views.index, name='index'),
     path('jot/', include('jot.urls')),
 ]
