@@ -4,17 +4,6 @@ from django.contrib.auth.models import User
 import uuid
 from turtle import title
 
-
-
-
-# Create your models here.
-class Post(models.Model):
-    title= models.CharField(max_length=50)
-    body= models.TextField()
-
-    def __str__(self) -> str:
-        return super().__str__()
-
 # This is unfinished, I'll come back to it and finish it later
 # Note that the rest of my comments are things I've put here so I can come and fix them later
 class Post(models.Model):
