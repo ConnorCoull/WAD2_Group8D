@@ -1,8 +1,10 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-#from .forms import UploadFileForm
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+from .forms import BookForm
+#call the upload method in Forms
+from .models import Book
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
@@ -91,4 +93,16 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
-
+#i
+#required login?
+def upload_files(request):
+    if request.method == 'POST' :
+        form = BookForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('categories')
+        #if upload successed, then return to categories page.(or anyothers?)
+    else:
+        form = BookForm()
+    return render(request,'jot/addbook.html',{'form':form})
+ 
