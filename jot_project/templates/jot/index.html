@@ -12,11 +12,11 @@
         </div>
         <div class="name-block">
           <strong>Top Reads:</strong>
-          {% if pages %}
+          {% if books_list %}
           <ul class="books-list">
-            {% for page in pages %}
+            {% for book in books_list %}
             <li>
-              <a href="{{ book.url }}">{{ book.title }}</a>
+              <a href="/book/{{book.id}}">{{ book.book_title }}</a>
             </li>
             {% endfor %}
           {% else %}
