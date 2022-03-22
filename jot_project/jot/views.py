@@ -2,9 +2,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+#call the upload function in Forms
 from .forms import BookForm
-#call the upload method in Forms
 from .models import Book
+from django.conf import settings
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
@@ -101,7 +102,7 @@ def upload_files(request):
         if form.is_valid():
             form.save()
             return redirect('categories')
-        #if upload successed, then return to categories page.(or anyothers?)
+        #if upload successed, then return to categories page.(or anyother pages?)
     else:
         form = BookForm()
     return render(request,'jot/addbook.html',{'form':form})
