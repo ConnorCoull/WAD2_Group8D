@@ -1,9 +1,10 @@
+from pyexpat import model
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 #from .forms import UploadFileForm
 from django.db.models import Q
 from datetime import datetime
-
+from .models import Book
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
@@ -34,10 +35,18 @@ def index(request):
         #form = UploadFileForm()
     #return render(request, 'upload.html', {'form': form})'''
 
+    #  book_title
+    model = Book
+    query = request.GET.get('q')
+    object_list = Book.objects.filter(book_title__icontains = query)
+    # print(object_list)
+    #  return object_list
+
     #context_dict = {'boldmessage': 'Check'}
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
+    context_dict['object_list'] = object_list
     return render(request, 'jot/index.html', context=context_dict)
     #return HttpResponse("<h1>JOT</h1><p>I am the homepage!</p>")
 

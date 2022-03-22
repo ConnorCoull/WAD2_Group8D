@@ -151,6 +151,7 @@ body {
 #search-bar-button {
   float: right;
   top: 25%;
+  width: 100%;
 }
 
 ul.navbar {
@@ -256,4 +257,35 @@ ul.navbar li a {
   font-family: "Poppins", sans-serif;
 }
 .block-title {
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 15px;
+}
+
+
+.search .keyword{
+  width: 100%;
+  display: block;
+  height: 26px;
+}
+
+
+.books-list {
+  list-style-type: none;
+}
+
+.books-list li {}
+.books-list li a {
+  color: #fff;
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.books-list li a:hover{
+  text-decoration: underline;
 }
