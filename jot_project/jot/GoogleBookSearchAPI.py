@@ -7,14 +7,13 @@ def getRatings(title):
     api = "https://www.googleapis.com/books/v1/volumes?q=:"
 
     #Swap the spaces in the tile with +
-    title = title.replace(" ", "+")
+    title = str(title).replace(" ", "+")
 
     # send a request and get a JSON response
     resp = urlopen(api + title)
     # parse JSON into Python as a dictionary
     results = json.load(resp)
     
-    #print(results)
     #Return a default value if there are no results 
     if results["totalItems"] == 0:
         return [0,0]
