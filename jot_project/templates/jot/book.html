@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-
-
-<html>
-    <head>
-        <title>
-            JOT
-        </title>
-    </head>
-    <body>
-        <div><h1>JOT<h1> remember the o is an on-click event to load a random page</div>
-        <div>Login stuff here</div>
-        <div>Page links here</div>
-        <div>the sidebar goes here, maybe needs 2 divs</div>
-        <div>remember and use css to make this work on laptop and mobile if possible</div>
-        <!-- above is all header block-->
-        <div>Download link for the PDF (media file)</div>
-        <div>The star rating (JS(?)) and the total number of reviews</div>
-        <div>Will also have a how-to block that uses JQuery to control the display of, this goes in the script.js (or maybe several small script files)</div>
-        <!-- below this is the footer block-->
-        <div>Footer</div>
-    </body>
-</html>
+{% extends 'jot/base.html' %} {% load static %} {% block title_block %}
+Categories {%endblock %} {% block body_block %}
+<h1 class="h1-title-block">book.title</h1>
+<div class="book-div">
+  <div class="book-link">book.link</div>
+  <div class="download symbol">s</div>
+</div>
+<div class="review-div"></div>
+<div class="download-instructions"></div>
+<p class="main-paragraph">
+  This needs the div containing the download file, a div that displays the
+  rating and functions as a way for a user to add a rating, and an expandable
+  div with instructions on how to download the file
+</p>
+{% endblock %}
