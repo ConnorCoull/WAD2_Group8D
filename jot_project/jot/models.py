@@ -30,6 +30,30 @@ class Users(models.Model):
     
 
 class Book(models.Model):
+    HORROR='HR'
+    FICTION='FI'
+    NONFICTION='NF'
+    CRIME='CR'
+    KIDS='KI'
+    LIFESTYLE='LS'
+    HISTORY='HS'
+    NOGENRE='NG'
+    
+    CATEGORY_CHOICES=[
+        (HORROR, 'Horror'),
+        (FICTION, 'Fiction'),
+        (NONFICTION, 'Non-Fiction'),
+        (CRIME, 'Crime'),
+        (KIDS, 'Kids'),
+        (LIFESTYLE, 'Lifestyle'),
+        (HISTORY, 'History'),
+        (NOGENRE,'No Genre'),
+
+
+    ]
+    
+    
+    
     #There is an uploaded_by and author. This is because a user might want to upload a book they themselves did not write
     #book_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE)
     book_title = models.CharField(max_length=30)
@@ -47,6 +71,12 @@ class Book(models.Model):
     ) # The book can only be rated between 1-5, so the rating will be between these numbers
     book_file_path = models.CharField(max_length=128)
     book_views = models.IntegerField(default=0)
+    book_category = models.CharField(
+        max_length = 2,
+        choices = CATEGORY_CHOICES,
+        default = NOGENRE,
+
+    )
 
     def __str__(self):
         return self.book_title

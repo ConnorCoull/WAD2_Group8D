@@ -11,38 +11,10 @@ from django.conf import settings
 #from somewhere import handle_uploaded_file
 
 def index(request):
-
-    '''html=
-    <from>
-        <form role="search" method="get" id="searchform" action="/search/">
-            {% url jot:search %}
-        <input type="search" name="q" placeholder="lets search!" required>
-        <button type="sub">
-        <span class=""></span></button>>
-    </from>
-    
-    q = request.GET.get('q')
-    error_msg = ''
-    if not q:
-        error_msg = "input what you want to search"
-        return render(request, 'index.html', {'error_msg': error_msg})
-    post_list = Post.objects.filter(Q(title_icontains=q)|Q(body__icontains=q))      
-    return render(request, 'index.html', {'error_msg': error_msg, 'post_list':post_list}) 
-    #if request.method == 'POST':
-        #form = UploadFileForm(request.POST, request.FILES)
-       # if form.is_valid():
-            #handle_uploaded_file(request.FILES['file'])
-            #return HttpResponseRedirect('/success/url/')
-    #else:
-        #form = UploadFileForm()
-    #return render(request, 'upload.html', {'form': form})'''
-
-    #context_dict = {'boldmessage': 'Check'}
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/index.html', context=context_dict)
-    #return HttpResponse("<h1>JOT</h1><p>I am the homepage!</p>")
 
 
 def about(request):
@@ -50,7 +22,6 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/about.html', context=context_dict)
-    #return HttpResponse("<h1>JOT</h1><p>This is the about page</p><a href='/jot/'>Index</a>")
 
 def contactus(request):
     #maybe a dictionary of our information would be useful
@@ -74,6 +45,15 @@ def surpriseme(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/surpriseme.html', context=context_dict)
+
+def book(request):
+    #this will take an argument of a page fetched at random
+
+    #potentually get rid of all of this and in the return return a page.html response??
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'jot/book.html', context=context_dict)
 
 # Not a view, this is just a helper function
 def get_server_side_cookie(request, cookie, default_val=None):
@@ -106,4 +86,4 @@ def upload_files(request):
     else:
         form = BookForm()
     return render(request,'jot/addbook.html',{'form':form})
- 
+

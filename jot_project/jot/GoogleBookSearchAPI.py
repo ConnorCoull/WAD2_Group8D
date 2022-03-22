@@ -7,7 +7,7 @@ def getRatings(title):
     api = "https://www.googleapis.com/books/v1/volumes?q=:"
 
     #Swap the spaces in the tile with +
-    title = title.replace(" ", "+")
+    title = str(title).replace(" ", "+")
 
     # send a request and get a JSON response
     resp = urlopen(api + title)
@@ -20,4 +20,9 @@ def getRatings(title):
 
     #Get the info for the first book from the query 
     bookInfo = results["items"][0]["volumeInfo"]
-    return [bookInfo['averageRating'],bookInfo['ratingsCount']]
+
+    #check if the book has been reviewed
+    if 'ratingsCount' in bookInfo:
+        return [bookInfo['averageRating'],bookInfo['ratingsCount']]
+    else:
+        return [0,0]
