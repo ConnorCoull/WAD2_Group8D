@@ -14,10 +14,16 @@ def getRatings(title):
     # parse JSON into Python as a dictionary
     results = json.load(resp)
     
+    #print(results)
     #Return a default value if there are no results 
     if results["totalItems"] == 0:
         return [0,0]
 
     #Get the info for the first book from the query 
     bookInfo = results["items"][0]["volumeInfo"]
-    return [bookInfo['averageRating'],bookInfo['ratingsCount']]
+
+    #check if the book has been reviewed
+    if 'ratingsCount' in bookInfo:
+        return [bookInfo['averageRating'],bookInfo['ratingsCount']]
+    else:
+        return [0,0]
