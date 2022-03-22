@@ -3,10 +3,15 @@
 
 <html>
   <head>
-    <title>
-        JOT - {% block title_block %}Sharing Worldwide{% endblock %}
-    </title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>JOT - {% block title_block %}Sharing Worldwide{% endblock %}</title>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
   </head>
   <body>
     <div class="logo"><h1>JOT</h1></div>
@@ -14,21 +19,30 @@
       <div id="login-block">Login stuff here</div>
     </div>
     <div class="bar" id="bar-two">
-    <ul class="navbar">
-        <li class="linkli"><a class="navlink" href="{% url 'jot:categories' %}">Categories</a></li>
-        <li class="linkli"><a class="navlink" href="{% url 'jot:surpriseme' %}">Surprise Me</a></li>
-        <li class="linkli"><a class="navlink" href="{% url 'jot:contactus' %}">Contact Us</a></li>
-        <li class="linkli"><a class="navlink" href="{% url 'jot:about' %}">About</a></li>
-    </ul>
+      <ul class="navbar">
+        <li class="linkli">
+          <a class="navlink" href="{% url 'jot:categories' %}">Categories</a>
+        </li>
+        <li class="linkli">
+          <a class="navlink" href="{% url 'jot:surpriseme' %}">Surprise Me</a>
+        </li>
+        <li class="linkli">
+          <a class="navlink" href="{% url 'jot:contactus' %}">Contact Us</a>
+        </li>
+        <li class="linkli">
+          <a class="navlink" href="{% url 'jot:about' %}">About</a>
+        </li>
+      </ul>
     </div>
     <div class="vertical-bar" id="vertical-bar-one">?</div>
     <div class="vertical-bar" id="vertical-bar-two">?</div>
     <!-- above is all header block-->
-    <div id="main">
-        {% block body_block %}
-        {% endblock %}
-    </div>
+    <div id="main">{% block body_block %} {% endblock %}</div>
     <!-- below this is the footer block-->
-    <div id="footer">JOT&trade; does not claim responsibility for any copyright infringement, press <kbd>Ctrl</kdb> + <kbd>Shft</kbd> + <kbd>J</kbd> to open up the developer console. Visits: {{ visits }}</div>
+    <div id="footer">
+      JOT&trade; does not claim responsibility for any copyright infringement,
+      press <kbd>Ctrl + Shft + J</kbd> to open up the developer console. Visits:
+      {{ visits }}
+    </div>
   </body>
 </html>
