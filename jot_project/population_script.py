@@ -16,10 +16,13 @@ def populate():
 
     test_books = [
         {'book_title': 'The Adventures of Bill and Dandy', 'author':'OnionGuy34672', 'book_description' : 'A book I wrote about 2 guys, bill and dandy',
-        'uploaded_by': 'OnionGuy34672' ,'book_date_published' : '2022-12-03', 'book_average_rating' : 1.2, 'book_file_path' : 'jot/media', 'book_views' : 5},
+        'uploaded_by': 'OnionGuy34672' ,'book_date_published' : '2022-12-03', 'book_average_rating' : 1.2, 'book_file_path' : 'jot/media', 
+        'book_category':'FI', 'book_views' : 5,
+        },
     
         {'book_title': 'Inferno', 'author':'Dante Alighieri', 'book_description' : '''The first part of Dante's poem Divine comedy''',
-        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 'book_views' : 81 }
+        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
+        'book_category':'HS','book_views' : 81 }
         ]
 
     test_reviews = [
@@ -37,7 +40,7 @@ def populate():
 
     for b in test_books:
         add_book(b['book_title'], b['author'], b['book_description'], b['uploaded_by'], b['book_date_published'], 
-        b['book_average_rating'], b['book_file_path'], b['book_views'])
+        b['book_average_rating'], b['book_file_path'], b['book_category'], b['book_views'])
 
     for r in test_reviews:
         #for r in d.values():
@@ -53,7 +56,7 @@ def add_user(username, user_password, user_type, user_email):
     u.save()
     return u
 
-def add_book(book_title, author, book_description, uploaded_by, book_date_published, book_average_rating, book_file_path, book_views=0):
+def add_book(book_title, author, book_description, uploaded_by, book_date_published, book_average_rating, book_file_path, book_category, book_views=0):
     b = Book.objects.get_or_create(book_title=book_title)[0]
     u = Users.objects.get_or_create(username=uploaded_by)[0]
     b.author=author
@@ -62,6 +65,7 @@ def add_book(book_title, author, book_description, uploaded_by, book_date_publis
     b.book_date_published=book_date_published
     b.book_average_rating=book_average_rating
     b.book_file_path=book_file_path
+    b.book_category=book_category
     b.book_views=book_views
     b.save()
     return b
