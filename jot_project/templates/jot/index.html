@@ -1,0 +1,38 @@
+{% extends 'jot/base.html' %}
+{% load static %}
+{% block title_block%}
+  Home
+{% endblock %}
+{% block body_block %}
+        <div id="search-bar">
+            <div id="search-bar-button">
+
+              <form class="search" action="{% url 'index' %}" method="get">
+                <input class="keyword" name="q" type="text" placeholder="Search...">
+                <button class="btn" type="submit">Search</button>
+              </form>
+
+
+              <form></form>
+              <button type="submit" value="search">Search</botton>
+
+            </div>
+        </div>
+        <div class="name-block">
+          <strong>Top Reads:</strong>
+         
+ 
+          {% if books_list %}
+          <ul class="books-list">
+            {% for list in books_list %}
+            <li>
+              <a href="/book/{{list.id}}">{{ list.book_title }}</a>
+            </li>
+            {% endfor %}
+          {% else %}
+          <strong>There are no pages present</strong>
+          {% endif %}
+          </ul>
+        </div>
+      </div>
+{% endblock %}
