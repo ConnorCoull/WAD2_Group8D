@@ -1,15 +1,19 @@
 {% extends 'jot/base.html' %} {% load static %} {% block title_block %}
-Categories {%endblock %} {% block body_block %}
+book.title {%endblock %} {% block body_block %}
 <h1 class="h1-title-block">book.title</h1>
 <div class="book-div">
   <div class="book-link">book.link</div>
   <div class="download symbol">s</div>
 </div>
 <div class="review-div"></div>
-<div class="download-instructions"></div>
-<p class="main-paragraph">
-  This needs the div containing the download file, a div that displays the
-  rating and functions as a way for a user to add a rating, and an expandable
-  div with instructions on how to download the file
-</p>
+<div class="button-div">instructions (button)</div>
+<div class="download-instructions">
+  <ul>
+    <li>You can just click the link to be taken to another tab</li>
+    <p text-align="center">or</p>
+    <li>Step 1: Click the download symbol (s)</li>
+    <li>Step 2: Navigate to your downloads folder</li>
+    <li>Step 3: Click on the file icon with the name of book.title.pdf</li>
+  </ul>
+</div>
 {% endblock %}

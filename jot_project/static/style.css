@@ -23,7 +23,6 @@ body {
   text-align: justify;
   -ms-text-justify: distribute-all-lines;
   text-justify: distribute-all-lines;
-  font-family: "Poppins", sans-serif;
 }
 .vertical-bar {
   background-color: #5c6274;
@@ -35,7 +34,6 @@ body {
   border-color: #f4f4f4;
   position: fixed;
   z-index: 0;
-  font-family: "Poppins", sans-serif;
 }
 #vertical-bar-one {
   left: 5%;
@@ -57,7 +55,6 @@ body {
   border-style: solid;
   border-color: #f4f4f4;
   border-radius: 25px;
-  font-family: "Poppins", sans-serif;
 }
 .logo {
   text-align: center;
@@ -73,7 +70,6 @@ body {
   border-radius: 2000px;
   background-color: #002b59;
   color: #f4f4f4;
-  font-family: "Poppins", sans-serif;
 }
 #main {
   top: 0;
@@ -108,7 +104,6 @@ body {
   border-color: #f4f4f4;
   border-radius: 25px;
   color: #f4f4f4;
-  font-family: "Poppins", sans-serif;
 }
 
 .books-list {
@@ -118,7 +113,6 @@ body {
   height: 80%;
   top: 20%;
   left: 0;
-  font-family: "Poppins", sans-serif;
 }
 
 #footer {
@@ -132,7 +126,6 @@ body {
   color: black;
   text-align: center;
   text-align: center;
-  font-family: "Poppins", sans-serif;
 }
 
 #filler {
@@ -144,8 +137,7 @@ body {
   position: relative;
   float: right;
   font-size: 20px;
-  font-size: 2.5vw;
-  font-family: "Poppins", sans-serif;
+  font-size: 2vw;
 }
 
 #search-bar-button {
@@ -174,8 +166,7 @@ ul.navbar li a {
   padding: 8px 16px;
   text-decoration: none;
   font-size: 20px;
-  font-size: 2.5vw;
-  font-family: "Poppins", sans-serif;
+  font-size: 2vw;
 }
 
 .h1-title-block {
@@ -183,7 +174,6 @@ ul.navbar li a {
   font-size: 4vw;
   text-align: center;
   color: #002b59;
-  font-family: "Poppins", sans-serif;
 }
 
 .h3-subtitle-block {
@@ -191,7 +181,6 @@ ul.navbar li a {
   font-size: 2.5vw;
   text-align: center;
   color: black;
-  font-family: "Poppins", sans-serif;
 }
 
 .main-paragraph {
@@ -200,7 +189,6 @@ ul.navbar li a {
   text-align: center;
   padding-left: 10%;
   padding-right: 10%;
-  font-family: "Poppins", sans-serif;
 }
 
 .button-div {
@@ -208,14 +196,15 @@ ul.navbar li a {
   color: #f4f4f4;
   position: absolute;
   text-align: left;
-  width: 80%;
+  width: 76%;
   height: 3%;
   padding-top: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
   margin-bottom: 0;
   top: 60%;
   left: 10%;
   z-index: 2;
-  font-family: "Poppins", sans-serif;
 }
 .download-instructions {
   background-color: #5c6274;
@@ -229,7 +218,6 @@ ul.navbar li a {
   top: 64%;
   left: 10%;
   z-index: 0;
-  font-family: "Poppins", sans-serif;
 }
 
 .review-div {
@@ -237,11 +225,12 @@ ul.navbar li a {
   color: #f4f4f4;
   position: absolute;
   text-align: left;
-  width: 80%;
+  width: 76%;
   height: 15%;
   top: 40%;
   left: 10%;
-  font-family: "Poppins", sans-serif;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .book-div {
@@ -253,7 +242,6 @@ ul.navbar li a {
   height: 10%;
   top: 25%;
   left: 10%;
-  font-family: "Poppins", sans-serif;
 }
 .block-title {
 }
