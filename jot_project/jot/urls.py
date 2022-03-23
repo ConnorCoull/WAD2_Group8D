@@ -13,5 +13,7 @@ urlpatterns = [
     path('categories/', views.categories, name='categories'),
     path('surpriseme/', views.surpriseme, name='surpriseme'),
     path('book/', views.book, name='book'),
+    #new link added (to test my function...)
+    path('addbook/',views.upload_books,name = 'addbook'),
     
 ]
