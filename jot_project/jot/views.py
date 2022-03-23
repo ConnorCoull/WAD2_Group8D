@@ -11,11 +11,11 @@ from .models import Book
 def index(request):
     model = Book
     keyword = request.GET.get('q')
-    books_list = Book.objects.filter(book_title__icontains = keyword)
+    books = Book.objects.filter(book_title__icontains = keyword)
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    context_dict['books_list'] = books_list
+    context_dict['books'] = books
     return render(request, 'jot/index.html', context=context_dict)
 
 
