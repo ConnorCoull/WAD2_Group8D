@@ -8,7 +8,6 @@ class BookForm(forms.ModelForm):
         fields = ('book_title',
                   'author',
                   'book_description',
-                  'uploaded_by',
-                  'book_date_published',
-                  'book_average_rating',
+                  'pdf_upload',
+
                   )

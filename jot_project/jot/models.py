@@ -58,7 +58,13 @@ class Book(models.Model):
     #book_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE)
     book_title = models.CharField(max_length=30)
     author = models.CharField(max_length=32)
+    #from ZHAN: I changed it to make it optional  
+    # "And it needs add 'crispy_forms in settings/INSTALLED_APPS'"
+    # And change .html files to {% load crispy_forms_tags %} and {{ form|crispy}}
+    #book_description = models.CharField(max_length=250, null=True, blank=True)
     book_description = models.CharField(max_length=250)
+    #from ZHAN: add_path!""in .media/"
+    #pdf_upload = models.FileField(upload_to = '')
     uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     #book_id = models.IntegerField(unique=True)

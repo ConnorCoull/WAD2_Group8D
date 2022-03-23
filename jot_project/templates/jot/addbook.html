@@ -1,21 +1,13 @@
-<!DOCTYPE html>
+{% extends 'jot/base.html' %}
 
+{% block title_block %}
+<h2>UploadBooks</h2> 
+{%endblock %}
+{% block body_block %}
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="btn btn_primary">Upload book</button>
+</form>
 
-<html>
-    <head>
-        <title>
-            JOT
-        </title>
-    </head>
-    <body>
-        <div><h1>JOT<h1> remember the o is an on-click event to load a random page</div>
-        <div>Login stuff here</div>
-        <div>Page links here</div>
-        <div>the sidebar goes here, maybe needs 2 divs</div>
-        <div>remember and use css to make this work on laptop and mobile if possible</div>
-        <!-- above is all header block-->
-        <div>form containing space for the name, the file and a description</div>
-        <!-- below this is the footer block-->
-        <div>Footer</div>
-    </body>
-</html>
+{% endblock %}

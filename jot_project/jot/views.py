@@ -4,7 +4,6 @@ from django.db.models import Q
 from datetime import datetime
 #call the upload function in Forms
 from .forms import BookForm
-from .models import Book
 from django.conf import settings
 
 # Imaginary function to handle an uploaded file.
@@ -76,14 +75,14 @@ def visitor_cookie_handler(request):
     request.session['visits'] = visits
 #i
 #required login?
-def upload_files(request):
+def upload_books(request):
     if request.method == 'POST' :
         form = BookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('categories')
-        #if upload successed, then return to categories page.(or anyother pages?)
+            return redirect('index')
     else:
         form = BookForm()
-    return render(request,'jot/addbook.html',{'form':form})
+        
+    return render(request,'jot/addbook.html',{'form': form})
 
