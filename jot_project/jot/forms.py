@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ConnorCoull-main
 from django import forms 
 from django.contrib.auth.models import User
 from jot.models import UserProfile,Book
@@ -11,19 +7,13 @@ class UserForm(forms.ModelForm):
     
     class Meta:
         model = User
-        fields = ('username', 'user_email', 'user_password','user_type')
+        fields = ('username', 'email', 'password')
     
-    class UserProfileForm(forms.ModelForm):
-        class Meta:
-            model = UserProfile
-            fields = ('bio', 'user_picture',)
-<<<<<<< HEAD
-=======
-from django import forms
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('bio', 'user_picture',)
 
-from .models import Book
-=======
->>>>>>> ConnorCoull-main
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -34,7 +24,3 @@ class BookForm(forms.ModelForm):
                   'pdf_upload',
 
                   )
-<<<<<<< HEAD
->>>>>>> 506170a8bee247f8375cfe10fe5ef30a71524778
-=======
->>>>>>> ConnorCoull-main
