@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jot',
+    'registration'
 ]
 
 MIDDLEWARE = [
@@ -106,6 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+#Registartion Package varibles, make sure you have Django Registration Redux 
+REGISTRATION_OPEN = True
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = 'jot:index'
+LOGIN_URL = 'auth_login'
 
 
 # Internationalization

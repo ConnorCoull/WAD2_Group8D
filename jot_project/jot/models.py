@@ -130,6 +130,7 @@ class Admin(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_type = models.BooleanField(default=False)
     user_picture = models.ImageField()  #change upload to file when its set up
     bio = models.TextField()
 
