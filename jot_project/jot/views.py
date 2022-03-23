@@ -12,6 +12,7 @@ def index(request):
     model = Book
     keyword = request.GET.get('q')
     context_dict = {}
+    
     if keyword:
        books_list = Book.objects.filter(book_title__icontains = keyword)
        context_dict['books_list'] = books_list

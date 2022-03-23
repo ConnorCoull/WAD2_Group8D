@@ -19,6 +19,7 @@
           <ul class="books-list">
             {% for list in books_list %}
             <li>
+              
               <a href="{% url 'jot:book' %}">{{ list.book_title }}</a>
             </li>
             {% endfor %}
