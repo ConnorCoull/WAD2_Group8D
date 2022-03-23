@@ -64,7 +64,7 @@ class Book(models.Model):
     #book_description = models.CharField(max_length=250, null=True, blank=True)
     book_description = models.CharField(max_length=250)
     #from ZHAN: add_path!""in .media/"
-    #pdf_upload = models.FileField(upload_to = '')
+    pdf_upload = models.FileField(upload_to = '')
     uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     #book_id = models.IntegerField(unique=True)
