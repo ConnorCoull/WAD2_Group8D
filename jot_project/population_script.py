@@ -77,10 +77,10 @@ def populate():
         for b in Book.objects.filter(book_category=c):
             print(f'-{c}: {b}')
 
-    #for r in test_reviews:
-        #for r in d.values():
-      #  add_review(r['review_id'], r['review_book'], r['reviewer'], r['review_rating'], r['review_date_written'], r['review_content'])
-    
+    for r in test_reviews:
+
+        print("Im running!")
+        add_review( r['review_book'], r['reviewer'], r['review_rating'], r['review_date_written'], r['review_content'])
 
 
 def add_user(username, user_password, user_type, user_email):
@@ -92,14 +92,11 @@ def add_user(username, user_password, user_type, user_email):
     return u
 
 def add_book(cat, book_title, author, book_description, uploaded_by, book_date_published, book_average_rating, book_file_path, book_category, book_views=0):
-    test = uuid.uuid4()
-    b = Book.objects.get_or_create(bookID = test)
     b = Book.objects.get_or_create(book_title=book_title)[0]
     c = Category.objects.get_or_create(category_name=cat)[0]
     c2 = Category.objects.get_or_create(category_name=book_category)[0]
     u = Users.objects.get_or_create(username=uploaded_by)[0]
     b.cat = c
-
     b.author=author
     b.book_description=book_description
     b.uploaded_by = u 
