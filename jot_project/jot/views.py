@@ -20,7 +20,6 @@ def index(request):
     keyword = request.GET.get('q')
     chosen_category = request.GET.get('chosen_category')
     context_dict = {}
-    visitor_cookie_handler(request)
     if chosen_category == "user":
         print(chosen_category)
         print(keyword)
@@ -41,6 +40,7 @@ def index(request):
 
          context_dict['books_list'] = books_list
     #    context_dict['author_list'] = author_list
+    visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     #    return render(request, 'jot/index.html', context=context_dict)
     return render(request, 'jot/index.html', context=context_dict)
