@@ -2,19 +2,22 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE','jot_project.settings')
 import django
 django.setup()
-from jot.models import Users, Book, Review, Admin, UserProfile, Category
-import uuid
+from jot.models import Users, Book, Review, Category
 
 def populate():
-        #if usertype is true the user in an author
-        #if usertype if false the user is a reader
+       
+
+    #The population script takes the information in the form of a list of dictionaries.
+    #This allows us to easily loop through and get the values we need and pass them to our add model functions.
 
     test_users = [
        
         {'username': 'OnionGuy34672', 'user_password':'password', 'user_type' : True, 'user_email' : 'OnionGuy34672@gmail.com'},
         {'username': 'coolAsACucumber', 'user_password':'password', 'user_type' : True, 'user_email' : 'coolAsACucumber@gmail.com'},
         {'username': 'DrPepperLover', 'user_password':'password', 'user_type': False, 'user_email' : 'DrPepperLover@gmail.com'},
-        {'username': 'Hamaguchi', 'user_password': 'password', 'user_type': True, 'user_email' : 'RHamaguchi@gmail.com'}        
+        {'username': 'pomeranianWriter', 'user_password': 'password', 'user_type': True, 'user_email' : 'pomeranian86345writer@gmail.com'},   
+        {'username': 'Geezer5623', 'user_password': 'password', 'user_type': False, 'user_email' : 'geezerinnit@gmail.com'} ,
+        {'username': 'readTheMostBooksEver', 'user_password': 'password', 'user_type': False, 'user_email' : 'bookEnthusiast@gmail.com'},            
         ]
 
     test_books = [
@@ -35,7 +38,15 @@ def populate():
         {'book_title':'The Myth Of Sisyphus', 'author':'Albert Camus', 'book_description':'''According to the Greek myth, Sisyphus is condemned to roll 
         a rock up to the top of a mountain, only to have the rock roll back down to the bottom every time he reaches the top. The gods were wise, 
         Camus suggests, in perceiving that an eternity of futile labor is a hideous punishment.''', 'uploaded_by':'Hamaguchi',
-         'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_file_path': 'jot/media', 'book_category': 'Philosophy', 'book_views': 12}
+         'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_file_path': 'jot/media', 'book_category': 'Philosophy', 'book_views': 12},
+
+        {'book_title':'Cthulhu loses his Ipad', 'author':'pomeranianWriter', 'book_description':'''Cthulhu - dreaded, colossal beast of the sea, takes a break from terrorising lone fishermen
+         to look for his ipad, which he swears he put somewhere near the indian ocean.''', 'uploaded_by':'pomeranianWriter',
+         'book_date_published':'2009-01-01', 'book_average_rating' : 2, 'book_file_path': 'jot/media', 'book_category': 'Fiction', 'book_views': 82},
+
+
+
+
         ]   
 
 
@@ -46,28 +57,23 @@ def populate():
         {'review_book': 'Inferno', 'reviewer':'OnionGuy34672', 'review_rating' : 5
         , 'review_date_written': '2022-12-22', 'review_content': 'An absolute classic'},
 
-        {'review_book':'The Myth of Sysphus', 'reviewer':'DrPepperLover', 'review_rating':4,
+        {'review_book':'The Myth Of Sisyphus', 'reviewer':'DrPepperLover', 'review_rating':4,
         'review_date_written': '2021-12-21', 'review_content': '''I found this quite obscure and difficult to read but after a few attempts,
-        I now believe this is the greatest book ever written and everyone must read this as soon as they can.'''}
+        I now believe this is the greatest book ever written and everyone must read this as soon as they can.'''},
+
+        {'review_book': 'The Adventures of Bill and Dandy', 'reviewer':'pomeranianWriter', 'review_rating' : 1
+        , 'review_date_written': '2021-12-21', 'review_content': 'Terrible! Bill and Dandy!! what silly names!'},
+
+        {'review_book': 'The Myth Of Sisyphus', 'reviewer':'OnionGuy34672', 'review_rating' : 2
+        , 'review_date_written': '2022-12-22', 'review_content': 'Depressing, this guy needs to brighten up.'},
         ]
 
 
 
     
-    
-    
-    
-    #for d in test_books:
-    #    for key, value in d.items():
-    #        if key == 'book_category':
-    #            c = add_category(value)
-
     for u in test_users:
         add_user(u['username'], u['user_password'], u['user_type'], u['user_email'])
 
-   # for b in test_books:
-    #    add_book(b['book_title'], b['author'], b['book_description'], b['uploaded_by'], b['book_date_published'], 
-     #   b['book_average_rating'], b['book_file_path'], b['book_category'], b['book_views'])
 
     counter = 0
     for i in test_books:
@@ -84,8 +90,6 @@ def populate():
             print(f'-{c}: {b}')
 
     for r in test_reviews:
-
-        print("Im running!")
         add_review( r['review_book'], r['reviewer'], r['review_rating'], r['review_date_written'], r['review_content'])
 
 
@@ -119,9 +123,6 @@ def add_review(review_book, reviewer, review_rating, review_date_written, review
     b = Book.objects.get_or_create(book_title=review_book)[0]
     r = Review.objects.get_or_create(review_book=b)[0]
     u = Users.objects.get_or_create(username=reviewer)[0]
-   # print(r)
-   #print(b)
-   # print(u)
     r.reviewer = u
     r.review_rating=review_rating
     r.review_date_written=review_date_written
