@@ -1,19 +1,38 @@
 {% extends 'jot/base.html' %} {% load static %} {% block title_block %}
 book.title {%endblock %} {% block body_block %}
-<h1 class="h1-title-block">book.title</h1>
+<h1 class="h1-title-block">book.category: book.title</h1>
 <div class="book-div">
-  <div class="book-link">book.link</div>
-  <div class="download symbol">s</div>
+  <div class="book-link">
+    book.link<!--<a href="book.url.pdf" target="_blank">book.title</a>-->
+  </div>
+  <div class="download-symbol">
+    <i class="fas fa-arrow-down"></i
+    ><!--<a href="book.url.pdf" download><i class="fas fa-arrow-down"></i></a>-->
+  </div>
 </div>
-<div class="review-div"></div>
-<div class="button-div">instructions (button)</div>
-<div class="download-instructions">
-  <ul>
-    <li>You can just click the link to be taken to another tab</li>
-    <p text-align="center">or</p>
-    <li>Step 1: Click the download symbol (s)</li>
-    <li>Step 2: Navigate to your downloads folder</li>
-    <li>Step 3: Click on the file icon with the name of book.title.pdf</li>
-  </ul>
+
+<div class="review-div">
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x"></i>
+  <i class="fas fa-star fa-2x"></i>
+  <i class="fas fa-star fa-2x"></i>
+  <i class="fas fa-star fa-2x"></i>
+  <i class="fas fa-star fa-2x"></i>
+</div>
+
+<div class="accordion">
+  <button type="button" class="accordion-button">Instructions</button>
+  <div class="accordion-content">
+    Click on the book title to be taken to another tab <br />
+    OR <br />
+    Click the download symbol (<i class="fas fa-arrow-down"></i>) <br />
+    Navigate to your downloads folder <br />
+    Click on the file icon called book.name.pdf
+  </div>
+  <script src="{% static 'script.js' %}"></script>
 </div>
 {% endblock %}
