@@ -22,8 +22,14 @@ def populate():
     
         {'book_title': 'Inferno', 'author':'Dante Alighieri', 'book_description' : '''The first part of Dante's poem Divine comedy''',
         'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
+        'book_category':'Historical','book_views' : 81 },
+        
+
+        {'book_title': 'Inferno2', 'author':'Dante Alighieri', 'book_description' : '''The first part of Dante's poem Divine comedy''',
+        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
         'book_category':'Historical','book_views' : 81 }
-        ]
+        ]   
+
 
     test_reviews = [
         {'review_id':'','review_book': 'The Adventues of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
