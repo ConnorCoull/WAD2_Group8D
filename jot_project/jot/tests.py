@@ -2,6 +2,7 @@
 #Otherwise use the unittest.TestCase class   
 from django.test import TestCase
 import unittest
+from .models import Book
 
 from jot.GoogleBookSearchAPI import getRatings
 
@@ -17,3 +18,8 @@ class ApiSearchTestCase(unittest.TestCase):
         self.assertNotEqual(getRatings(1984), [0,0])
         #Normal search should renturn a non-deafult result 
         self.assertNotEqual(getRatings("Lord of the Rings"),[0,0])
+
+    def test_models_books(self):
+        keyword = "Inferno"
+        books_list = Book.objects.filter(book_title__icontains = keyword)
+        self.assertEqual(books_list[0].book_title,"Inferno")

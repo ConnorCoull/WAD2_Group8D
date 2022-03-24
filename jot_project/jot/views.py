@@ -14,9 +14,14 @@ def index(request):
     visitor_cookie_handler(request)
     if keyword:
        books_list = Book.objects.filter(book_title__icontains = keyword)
+       if not books_list:
+           author = Book.objects.filter(author__icontains = keyword)
+           books_list = author
        context_dict['books_list'] = books_list
-    context_dict['visits'] = request.session['visits']
+       context_dict['visits'] = request.session['visits']
+       return render(request, 'jot/index.html', context=context_dict)
     return render(request, 'jot/index.html', context=context_dict)
+
 
 
 def about(request):
