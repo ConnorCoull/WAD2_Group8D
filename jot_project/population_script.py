@@ -36,10 +36,6 @@ def populate():
         a rock up to the top of a mountain, only to have the rock roll back down to the bottom every time he reaches the top. The gods were wise, 
         Camus suggests, in perceiving that an eternity of futile labor is a hideous punishment.''', 'uploaded_by':'Hamaguchi',
          'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_file_path': 'jot/media', 'book_category': 'Philosophy', 'book_views': 12}
-
-
-
-
         ]   
 
 
@@ -55,6 +51,16 @@ def populate():
         I now believe this is the greatest book ever written and everyone must read this as soon as they can.'''}
         ]
 
+
+
+    
+    
+    
+    
+    #for d in test_books:
+    #    for key, value in d.items():
+    #        if key == 'book_category':
+    #            c = add_category(value)
 
     for u in test_users:
         add_user(u['username'], u['user_password'], u['user_type'], u['user_email'])
