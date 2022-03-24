@@ -40,7 +40,7 @@ def populate():
 
 
     test_reviews = [
-        {'review_book': 'The Adventues of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
+        {'review_book': 'The Adventures of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
         , 'review_date_written': '2021-12-21', 'review_content': 'Decently written but rather bland at points'},
 
         {'review_book': 'Inferno', 'reviewer':'OnionGuy34672', 'review_rating' : 5
@@ -83,10 +83,10 @@ def populate():
         for b in Book.objects.filter(book_category=c):
             print(f'-{c}: {b}')
 
-    #for r in test_reviews:
-        #for r in d.values():
-      #  add_review(r['review_id'], r['review_book'], r['reviewer'], r['review_rating'], r['review_date_written'], r['review_content'])
-    
+    for r in test_reviews:
+
+        print("Im running!")
+        add_review( r['review_book'], r['reviewer'], r['review_rating'], r['review_date_written'], r['review_content'])
 
 
 def add_user(username, user_password, user_type, user_email):
@@ -98,14 +98,11 @@ def add_user(username, user_password, user_type, user_email):
     return u
 
 def add_book(cat, book_title, author, book_description, uploaded_by, book_date_published, book_average_rating, book_file_path, book_category, book_views=0):
-    test = uuid.uuid4()
-    b = Book.objects.get_or_create(bookID = test)
     b = Book.objects.get_or_create(book_title=book_title)[0]
     c = Category.objects.get_or_create(category_name=cat)[0]
     c2 = Category.objects.get_or_create(category_name=book_category)[0]
     u = Users.objects.get_or_create(username=uploaded_by)[0]
     b.cat = c
-
     b.author=author
     b.book_description=book_description
     b.uploaded_by = u 
@@ -119,13 +116,12 @@ def add_book(cat, book_title, author, book_description, uploaded_by, book_date_p
     return b
 
 def add_review(review_book, reviewer, review_rating, review_date_written, review_content):
-    r = Review.objects.get_or_create(review_book=review_book)[0]
-    b = Book.objects.get_or_create(book_title=review_book)
-    u = Users.objects.get_or_create(username=reviewer)
-    print(r)
-    print(b)
-    print(u)
-    r.review_book = b
+    b = Book.objects.get_or_create(book_title=review_book)[0]
+    r = Review.objects.get_or_create(review_book=b)[0]
+    u = Users.objects.get_or_create(username=reviewer)[0]
+   # print(r)
+   #print(b)
+   # print(u)
     r.reviewer = u
     r.review_rating=review_rating
     r.review_date_written=review_date_written
