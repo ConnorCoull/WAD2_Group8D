@@ -61,6 +61,12 @@ class Book(models.Model):
     #There is an uploaded_by and author. This is because a user might want to upload a book they themselves did not write
     #book_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE)
     
+    bookID = models.UUIDField(
+        primary_key = True,
+        default = uuid.uuid4,
+        editable = False,
+
+    )
 
     book_category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     book_title = models.CharField(max_length=30)
@@ -74,7 +80,6 @@ class Book(models.Model):
     pdf_upload = models.FileField(upload_to = '')
     uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
-    #book_id = models.IntegerField(unique=True)
     book_average_rating = models.PositiveIntegerField(
         default = 1,
         validators=[
@@ -99,7 +104,13 @@ class Book(models.Model):
         verbose_name_plural = 'Books'
 
 class Review(models.Model):
-    review_id = models.CharField(max_length=256, primary_key=True, editable=False, default="id352")
+    reviewID = models.UUIDField(
+        auto_created=True,
+        primary_key=True,
+        default = uuid.uuid4,
+        editable=False,
+        unique=True,
+    )
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
     reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     #review_id = models.IntegerField(unique=True)
