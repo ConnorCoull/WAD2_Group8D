@@ -3,15 +3,18 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','jot_project.settings')
 import django
 django.setup()
 from jot.models import Users, Book, Review, Admin, UserProfile, Category
-
+import uuid
 
 def populate():
+        #if usertype is true the user in an author
+        #if usertype if false the user is a reader
 
     test_users = [
        
         {'username': 'OnionGuy34672', 'user_password':'password', 'user_type' : True, 'user_email' : 'OnionGuy34672@gmail.com'},
-        {'username': 'coolAsACucumber', 'user_password':'password', 'user_type' : True, 'user_email' : 'coolAsACucumber@gmail.com'}
-        
+        {'username': 'coolAsACucumber', 'user_password':'password', 'user_type' : True, 'user_email' : 'coolAsACucumber@gmail.com'},
+        {'username': 'DrPepperLover', 'user_password':'password', 'user_type': False, 'user_email' : 'DrPepperLover@gmail.com'},
+        {'username': 'Hamaguchi', 'user_password': 'password', 'user_type': True, 'user_email' : 'RHamaguchi@gmail.com'}        
         ]
 
     test_books = [
@@ -24,22 +27,30 @@ def populate():
         'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
         'book_category':'Historical','book_views' : 81 },
         
-
+        #The third book below was added for one of Tianhao's unit tests
         {'book_title': 'Inferno2', 'author':'Dante Alighieri', 'book_description' : '''The first part of Dante's poem Divine comedy''',
         'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
-        'book_category':'Historical','book_views' : 81 }
+        'book_category':'Historical','book_views' : 81 },
+
+        {'book_title':'The Myth Of Sisyphus', 'author':'Albert Camus', 'book_description':'''According to the Greek myth, Sisyphus is condemned to roll 
+        a rock up to the top of a mountain, only to have the rock roll back down to the bottom every time he reaches the top. The gods were wise, 
+        Camus suggests, in perceiving that an eternity of futile labor is a hideous punishment.''', 'uploaded_by':'Hamaguchi',
+         'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_file_path': 'jot/media', 'book_category': 'Philosophy', 'book_views': 12}
         ]   
 
 
     test_reviews = [
-        {'review_id':'','review_book': 'The Adventues of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
+        {'review_book': 'The Adventues of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
         , 'review_date_written': '2021-12-21', 'review_content': 'Decently written but rather bland at points'},
 
-        {'review_id':'','review_book': 'Inferno', 'reviewer':'Users.OnionGuy34672', 'review_rating' : 5
-        , 'review_date_written': '2022-12-22', 'review_content': 'An absolute classic'}
+        {'review_book': 'Inferno', 'reviewer':'OnionGuy34672', 'review_rating' : 5
+        , 'review_date_written': '2022-12-22', 'review_content': 'An absolute classic'},
+
+        {'review_book':'The Myth of Sysphus', 'reviewer':'DrPepperLover', 'review_rating':4,
+        'review_date_written': '2021-12-21', 'review_content': '''I found this quite obscure and difficult to read but after a few attempts,
+        I now believe this is the greatest book ever written and everyone must read this as soon as they can.'''}
         ]
 
-    admin_test = [{'admin_username': 'adminguy23', 'admin_password': 'password', 'admin_email':'adminguy24@gmail.com'}]
 
 
     
@@ -87,6 +98,8 @@ def add_user(username, user_password, user_type, user_email):
     return u
 
 def add_book(cat, book_title, author, book_description, uploaded_by, book_date_published, book_average_rating, book_file_path, book_category, book_views=0):
+    test = uuid.uuid4()
+    b = Book.objects.get_or_create(bookID = test)
     b = Book.objects.get_or_create(book_title=book_title)[0]
     c = Category.objects.get_or_create(category_name=cat)[0]
     c2 = Category.objects.get_or_create(category_name=book_category)[0]
@@ -101,11 +114,12 @@ def add_book(cat, book_title, author, book_description, uploaded_by, book_date_p
     b.book_file_path=book_file_path
     b.book_category=c2
     b.book_views=book_views
+
     b.save()
     return b
 
-def add_review(review_id, review_book, reviewer, review_rating, review_date_written, review_content):
-    r = Review.objects.get_or_create(review_id=review_id)[0]
+def add_review(review_book, reviewer, review_rating, review_date_written, review_content):
+    r = Review.objects.get_or_create(review_book=review_book)[0]
     b = Book.objects.get_or_create(book_title=review_book)
     u = Users.objects.get_or_create(username=reviewer)
     print(r)
