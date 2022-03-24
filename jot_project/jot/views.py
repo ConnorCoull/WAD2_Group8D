@@ -18,11 +18,11 @@ def index(request):
     model = Book
     model = Users
     keyword = request.GET.get('q')
-    cate = request.GET.get('cate')
-    context_dict = {}
+    chosen_category = request.GET.get('chosen_category')
     visitor_cookie_handler(request)
-    if cate == "user":
-        print(cate)
+    context_dict = {}
+    if chosen_category == "user":
+        print(chosen_category)
         print(keyword)
         if keyword:
             # author
@@ -33,7 +33,7 @@ def index(request):
 
 
 
-    if cate == "book":
+    if chosen_category == "book":
         if keyword:
             # author
          books_list = Book.objects.filter(book_title__icontains = keyword)
