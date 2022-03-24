@@ -1,3 +1,4 @@
+from math import floor
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
@@ -55,12 +56,28 @@ def surpriseme(request):
 
 def book(request):
     #this will take an argument of a page fetched at random
+    #fetch book here
+    
+    context_dict = {}
 
-    #potentually get rid of all of this and in the return return a page.html response??
+    rating = 3.41564455554345345345 #grab this from the book data/ api
+    rating = floor(rating+0.5)
+
+    test_star_colour = ['#f4f4f4'] * rating
+    for count in range(rating):
+        context_dict['star'+str(count+1)] = '#ffd800'
+
+    visitor_cookie_handler(request)
+
+    context_dict['visits'] = request.session['visits']
+
+    return render(request, 'jot/book.html', context=context_dict)
+
+def searchresults(request):
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    return render(request, 'jot/book.html', context=context_dict)
+    return render(request, 'jot/searchresults.html', context=context_dict)
 
 # Not a view, this is just a helper function
 def get_server_side_cookie(request, cookie, default_val=None):

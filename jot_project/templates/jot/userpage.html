@@ -1,23 +1,33 @@
-<!DOCTYPE html>
+{% extends 'jot/base.html' %} {% load static %} {% block title_block %}
+user.username {%endblock %} {% block body_block %}
+<h1 class="h1-title-block">book.category: book.title</h1>
+<div class="book-div">
+  <div class="book-link">
+    book.link<!--<a href="book.url.pdf" target="_blank">book.title</a>-->
+  </div>
+  <div class="download-symbol">
+    <i class="fas fa-arrow-down"></i
+    ><!--<a href="book.url.pdf" download><i class="fas fa-arrow-down"></i></a>-->
+  </div>
+</div>
 
+<div class="review-div">
+  <i class="fas fa-star fa-2x" style="color: {{ test_star_colour }}[0]"></i>
+  <i class="fas fa-star fa-2x" style="color: {{ test_star_colour }}[1]"></i>
+  <i class="fas fa-star fa-2x" style="color: {{ test_star_colour }}[2]"></i>
+  <i class="fas fa-star fa-2x" style="color: {{ test_star_colour }}[3]"></i>
+  <i class="fas fa-star fa-2x" style="color: {{ test_star_colour }}[4]"></i>
+</div>
 
-<html>
-    <head>
-        <title>
-            JOT
-        </title>
-    </head>
-    <body>
-        <div><h1>YOU<h1> remember the o is an on-click event to load a random page</div>
-        <div>Login stuff here</div>
-        <div>Page links here</div>
-        <div>the sidebar goes here, maybe needs 2 divs</div>
-        <div>remember and use css to make this work on laptop and mobile if possible</div>
-        <!-- above is all header block-->
-        <div>Profile picture, circle must have padding</div>
-        <div>Profile information div</div>
-        <div>for books in user: display</div>
-        <!-- below this is the footer block-->
-        <div>Footer</div>
-    </body>
-</html>
+<div class="accordion">
+  <button type="button" class="accordion-button">Instructions</button>
+  <div class="accordion-content">
+    Click on the book title to be taken to another tab <br />
+    OR <br />
+    Click the download symbol (<i class="fas fa-arrow-down"></i>) <br />
+    Navigate to your downloads folder <br />
+    Click on the file icon called book.name.pdf
+  </div>
+  <script src="{% static 'script.js' %}"></script>
+</div>
+{% endblock %}
