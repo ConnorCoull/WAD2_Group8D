@@ -7,7 +7,7 @@ document.querySelectorAll(".accordion-button").forEach((button) => {
     if (button.classList.contains("accordion-button-active")) {
       accordionContent.style.maxHeight = "81%";
       accordionContent.style.padding = "2%";
-      accordionContent.style.fontSize = "2vw";
+      accordionContent.style.fontSize = "1.5vw";
     } else {
       accordionContent.style.maxHeight = 0;
       accordionContent.style.padding = "0";

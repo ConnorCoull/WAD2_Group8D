@@ -66,6 +66,12 @@ def book(request):
     context_dict['test_star_colour'] = ['#ffd800', '#ffd800', '#ffd800', '#ffd800', '#ffd800', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4']
     return render(request, 'jot/book.html', context=context_dict)
 
+def searchresults(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'jot/searchresults.html', context=context_dict)
+
 # Not a view, this is just a helper function
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)

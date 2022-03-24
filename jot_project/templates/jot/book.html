@@ -1,21 +1,22 @@
 {% extends 'jot/base.html' %} {% load static %} {% block title_block %}
 book.title {%endblock %} {% block body_block %}
-<h1 class="h1-title-block">book.title</h1>
+<h1 class="h1-title-block">book.category: book.title</h1>
 <div class="book-div">
   <div class="book-link">
     book.link<!--<a href="book.url.pdf" target="_blank">book.title</a>-->
   </div>
-  <div class="download symbol">
-    s<!--<a href="book.url.pdf" download>icon</a>-->
+  <div class="download-symbol">
+    <i class="fas fa-arrow-down"></i
+    ><!--<a href="book.url.pdf" download><i class="fas fa-arrow-down"></i></a>-->
   </div>
 </div>
 
 <div class="review-div">
-  <i class="fas fa-star fa-2x"></i>
-  <i class="fas fa-star fa-2x"></i>
-  <i class="fas fa-star fa-2x"></i>
-  <i class="fas fa-star fa-2x"></i>
-  <i class="fas fa-star fa-2x"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
+  <i class="fas fa-star fa-2x" style="color: yellow"></i>
   <i class="fas fa-star fa-2x"></i>
   <i class="fas fa-star fa-2x"></i>
   <i class="fas fa-star fa-2x"></i>
@@ -28,7 +29,7 @@ book.title {%endblock %} {% block body_block %}
   <div class="accordion-content">
     Click on the book title to be taken to another tab <br />
     OR <br />
-    Click the download symbol (s) <br />
+    Click the download symbol (<i class="fas fa-arrow-down"></i>) <br />
     Navigate to your downloads folder <br />
     Click on the file icon called book.name.pdf
   </div>
