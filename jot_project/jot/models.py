@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 import uuid
+from django.template.defaultfilters import slugify
 
 # This is unfinished, I'll come back to it and finish it later
 # Note that the rest of my comments are things I've put here so I can come and fix them later
@@ -25,6 +26,10 @@ class Users(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length = 50, unique=True) 
+    slug = models.SlugField()
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.category_name)
+        super(Category, self).save(*args, **kwargs)
     
     class Meta:
         verbose_name = 'Category'
@@ -60,13 +65,9 @@ class Book(models.Model):
     
     
     #There is an uploaded_by and author. This is because a user might want to upload a book they themselves did not write
-    #book_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE
-    bookID = models.UUIDField(
-        primary_key = True,
-        default = uuid.uuid4,
-        editable = False,
-
-    )
+    #book_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE)
+    
+    bookID = models.AutoField(primary_key=True)
 
     book_category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     book_title = models.CharField(max_length=30)
@@ -89,6 +90,10 @@ class Book(models.Model):
     ) # The book can only be rated between 1-5, so the rating will be between these numbers
     book_file_path = models.CharField(max_length=128)
     book_views = models.IntegerField(default=0)
+    slug = models.SlugField()
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.bookID)
+        super(Book, self).save(*args, **kwargs)
     #book_category = models.CharField(
    #     max_length = 2,
    #     choices = CATEGORY_CHOICES,
@@ -96,7 +101,10 @@ class Book(models.Model):
 
    # )
 
+
     def __str__(self):
+        #print(self.book_title+"_"+str(self.bookID))
+        #return str(self.book_title+"_"+str(self.bookID))
         return self.book_title
     
     class Meta:
@@ -104,14 +112,8 @@ class Book(models.Model):
         verbose_name_plural = 'Books'
 
 class Review(models.Model):
-    reviewID = models.UUIDField(
-        auto_created=True,
-        primary_key=True,
-        default = uuid.uuid4,
-        editable=False,
-        unique=True,
-    )
-  
+    
+    reviewID = models.AutoField(primary_key=True)
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
     reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
     #review_id = models.IntegerField(unique=True)
@@ -123,13 +125,13 @@ class Review(models.Model):
             MaxValueValidator(5)
         ]
 
-
+    
     )
     review_date_written = models.DateField(auto_now=False, auto_now_add=True)
     review_content = models.CharField(max_length=250)
 
     def __str__(self):
-        return self.review_rating #maybe change this and make another variable to be the unique identifier
+        return self.review_content
 
     class Meta:
         verbose_name = 'Review'
