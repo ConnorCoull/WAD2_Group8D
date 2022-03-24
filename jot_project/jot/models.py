@@ -102,8 +102,9 @@ class Book(models.Model):
 
 
     def __str__(self):
-        print(self.book_title+"_"+str(self.bookID))
-        return str(self.book_title+"_"+str(self.bookID))
+        #print(self.book_title+"_"+str(self.bookID))
+        #return str(self.book_title+"_"+str(self.bookID))
+        return self.book_title
     
     class Meta:
         verbose_name = 'Book'
@@ -128,7 +129,7 @@ class Review(models.Model):
     review_content = models.CharField(max_length=250)
 
     def __str__(self):
-        return self.review_rating #maybe change this and make another variable to be the unique identifier
+        return self.review_book #maybe change this and make another variable to be the unique identifier
 
     class Meta:
         verbose_name = 'Review'

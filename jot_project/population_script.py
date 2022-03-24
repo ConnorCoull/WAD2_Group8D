@@ -44,7 +44,7 @@ def populate():
 
 
     test_reviews = [
-        {'review_book': 'The Adventues of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
+        {'review_book': 'The Adventures of Bill and Dandy', 'reviewer':'coolAsACucumber', 'review_rating' : 3
         , 'review_date_written': '2021-12-21', 'review_content': 'Decently written but rather bland at points'},
 
         {'review_book': 'Inferno', 'reviewer':'OnionGuy34672', 'review_rating' : 5
@@ -110,13 +110,12 @@ def add_book(cat, book_title, author, book_description, uploaded_by, book_date_p
     return b
 
 def add_review(review_book, reviewer, review_rating, review_date_written, review_content):
-    r = Review.objects.get_or_create(review_book=review_book)[0]
-    b = Book.objects.get_or_create(book_title=review_book)
-    u = Users.objects.get_or_create(username=reviewer)
-    print(r)
-    print(b)
-    print(u)
-    r.review_book = b
+    b = Book.objects.get_or_create(book_title=review_book)[0]
+    r = Review.objects.get_or_create(review_book=b)[0]
+    u = Users.objects.get_or_create(username=reviewer)[0]
+   # print(r)
+   #print(b)
+   # print(u)
     r.reviewer = u
     r.review_rating=review_rating
     r.review_date_written=review_date_written
