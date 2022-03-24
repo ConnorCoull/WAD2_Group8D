@@ -55,11 +55,15 @@ def surpriseme(request):
 
 def book(request):
     #this will take an argument of a page fetched at random
-
-    #potentually get rid of all of this and in the return return a page.html response??
+    #fetch book here
+    #star_colours = ['#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4']
+    #for counter in range(book.rating **assuming rating is rounded to nearest .5** ):
+    #   star_colours[book.rating/2] = #yellow
+    #context_dict['star_colours'] = star_colours
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
+    context_dict['test_star_colour'] = ['#ffd800', '#ffd800', '#ffd800', '#ffd800', '#ffd800', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4']
     return render(request, 'jot/book.html', context=context_dict)
 
 # Not a view, this is just a helper function
