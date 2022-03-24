@@ -1,15 +1,25 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-#from .forms import UploadFileForm
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+
+#call the upload function in Forms
+from .forms import BookForm
+from django.conf import settings
+
+from .models import Book
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
 def index(request):
+    model = Book
+    keyword = request.GET.get('q')
     context_dict = {}
     visitor_cookie_handler(request)
+    if keyword:
+       books_list = Book.objects.filter(book_title__icontains = keyword)
+       context_dict['books_list'] = books_list
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/index.html', context=context_dict)
 
@@ -71,3 +81,16 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
+#i
+#required login?
+def upload_books(request):
+    if request.method == 'POST' :
+        form = BookForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = BookForm()
+        
+    return render(request,'jot/addbook.html',{'form': form})
+

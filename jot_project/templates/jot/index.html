@@ -6,17 +6,19 @@
 {% block body_block %}
         <div id="search-bar">
             <div id="search-bar-button">
-              <form></form>
-              <button type="submit" value="search">Search</botton>
+              <form class="search" action="{% url 'index' %}" method="get">
+                <input class="keyword" name="q" type="text" placeholder="Search...">
+                <button class="btn" type="submit">Search</button>
+              </form>
             </div>
         </div>
         <div class="name-block">
           <strong>Top Reads:</strong>
-          {% if pages %}
+          {% if books_list %}
           <ul class="books-list">
-            {% for page in pages %}
+            {% for book in books_list %}
             <li>
-              <a href="{{ book.url }}">{{ book.title }}</a>
+              <a href="{% url 'jot:book' %}">{{ book }}</a>
             </li>
             {% endfor %}
           {% else %}
