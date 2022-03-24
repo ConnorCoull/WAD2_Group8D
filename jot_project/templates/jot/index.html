@@ -9,6 +9,10 @@
               <form class="search" action="{% url 'index' %}" method="get">
                 <input class="keyword" name="q" type="text" placeholder="Search...">
                 <button class="btn" type="submit">Search</button>
+                <select id="choose-list" name="chosen_category">
+                  <option value="user">user</option>
+                  <option value="book">book</option>
+                </select>
               </form>
             </div>
         </div>
@@ -21,10 +25,22 @@
               <a href="{% url 'jot:book' %}">{{ book }}</a>
             </li>
             {% endfor %}
+          </ul>
+          {% elif users_list %}
+
+
+          <ul class="books-list">
+            {% for user in users_list %}
+            <li>
+              <a href="{% url 'jot:book' %}">{{ user }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+
           {% else %}
           <strong>There are no pages present</strong>
           {% endif %}
-          </ul>
+          
         </div>
       </div>
 {% endblock %}

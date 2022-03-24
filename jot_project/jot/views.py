@@ -9,19 +9,40 @@ from .forms import BookForm
 from django.conf import settings
 
 from .models import Book
+from .models import Users
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
 def index(request):
     model = Book
+    model = Users
     keyword = request.GET.get('q')
+    chosen_category = request.GET.get('chosen_category')
     context_dict = {}
+    if chosen_category == "user":
+        print(chosen_category)
+        print(keyword)
+        if keyword:
+            # author
+         users_list = Users.objects.filter(username__icontains = keyword)
+         print(users_list)
+
+         context_dict['users_list'] = users_list
+
+
+
+    if chosen_category == "book":
+        if keyword:
+            # author
+         books_list = Book.objects.filter(book_title__icontains = keyword)
+         print(books_list)
+
+         context_dict['books_list'] = books_list
+    #    context_dict['author_list'] = author_list
     visitor_cookie_handler(request)
-    if keyword:
-       books_list = Book.objects.filter(book_title__icontains = keyword)
-       context_dict['books_list'] = books_list
     context_dict['visits'] = request.session['visits']
+    #    return render(request, 'jot/index.html', context=context_dict)
     return render(request, 'jot/index.html', context=context_dict)
 
 
