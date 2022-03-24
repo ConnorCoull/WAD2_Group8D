@@ -111,6 +111,7 @@ class Book(models.Model):
         verbose_name_plural = 'Books'
 
 class Review(models.Model):
+    
     reviewID = models.AutoField(primary_key=True)
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
     reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
@@ -123,13 +124,13 @@ class Review(models.Model):
             MaxValueValidator(5)
         ]
 
-
+    
     )
     review_date_written = models.DateField(auto_now=False, auto_now_add=True)
     review_content = models.CharField(max_length=250)
 
     def __str__(self):
-        return self.review_book #maybe change this and make another variable to be the unique identifier
+        return self.review_content
 
     class Meta:
         verbose_name = 'Review'
