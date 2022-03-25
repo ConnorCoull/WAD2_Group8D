@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jot',
+    #'crispy_forms',
 ]
+
+#CRISPY_TEMPLATE_PACK = 'bootstrap4'
+#This is the section on importing input limits, unfortunately input limits are still a bit problematic, so I commented them out.  
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

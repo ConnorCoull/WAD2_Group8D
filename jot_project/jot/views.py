@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 #call the upload function in Forms
 from .forms import BookForm
@@ -119,8 +120,8 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
-#i
-#required login?
+
+@login_required
 def upload_books(request):
     if request.method == 'POST' :
         form = BookForm(request.POST,request.FILES)

@@ -1,13 +1,20 @@
 {% extends 'jot/base.html' %}
 
+<!--{% load crispy_forms_tags %}  -->
+
+{% if current_user.is_authenticated %}
+
 {% block title_block %}
-<h2>UploadBooks</h2> 
+<li><a href = "{% url 'rango:restricted' %}">UploadBooks</a></li> 
 {%endblock %}
 {% block body_block %}
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn_primary">Upload book</button>
+<!--{{ form|crispy }}{{-->
+	<!-- The commented line is the code that sets which tags must be entered  -->
+ form.as_p}}
+<button type="submit" class="btn btn_success">Upload book</button>
 </form>
 
 {% endblock %}
+{% endif %}
