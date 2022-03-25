@@ -6,7 +6,7 @@ from datetime import datetime
 from .GoogleBookSearchAPI import getRatings
 
 #call the upload function in Forms
-from .forms import BookForm
+from .forms import BookForm, UserProfileForm
 from django.conf import settings
 
 from .models import Book
@@ -130,3 +130,10 @@ def upload_books(request):
         
     return render(request,'jot/addbook.html',{'form': form})
 
+#Matthew: here we alow users to edit thier bio, user type and proficle pic, email adress
+#and usernmae cannot be changed, chaging password is seperate 
+def edit_profile(request):
+    if request.method == 'POST' :
+        profile_form = UserProfileForm(request.POST)
+        if profile_form.is_valid():
+            profile_form.save()

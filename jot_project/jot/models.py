@@ -1,6 +1,8 @@
 from django.db import models 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import uuid
 from django.template.defaultfilters import slugify
 
@@ -19,7 +21,8 @@ from django.template.defaultfilters import slugify
 
 # Note the user_type is a boolean value that stores whether the user is a reader or a writer. 
 # The user_type is simply just for display purposes on the users profile and has no other effect.
-#              
+#
+# FROM Matthew: shouldnt the UserProfile model below that links to the django user model be used?              
 class Users(models.Model):
     username = models.CharField(max_length=64, unique=True)
     user_password = models.CharField(max_length=64)
@@ -119,13 +122,22 @@ class Review(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_type = models.BooleanField(default=False)
     user_picture = models.ImageField()  #change upload to file when its set up
-    bio = models.TextField()
+    bio = models.TextField(blank=True, default="hello, i'm on JOT!")
 
     def __str__(self):
-        return self.Users.username
+        return self.user.username
 
     class Meta:
         verbose_name = 'UserProfile'
         verbose_name_plural = 'UserProfiles'
+
+#This function just updates the related User Model when the UserProfile gets updated
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
 
