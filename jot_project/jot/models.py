@@ -1,12 +1,14 @@
 from django.db import models 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import uuid
 
 # This is unfinished, I'll come back to it and finish it later
 # Note that the rest of my comments are things I've put here so I can come and fix them later
 
-#FROM Matthew: the UserProfile model below links to the django user model and should be used
+#FROM Matthew: shouldnt the UserProfile model below that links to the django user model be used?
 class Users(models.Model):
     #Not sure if user gets its own model but I've made it here anyway, can always remove it
     #user_admin_deletes = models.ForeignKey(Admin, on_delete=models.CASCADE)
@@ -152,13 +154,24 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_type = models.BooleanField(default=False)
     user_picture = models.ImageField()  #change upload to file when its set up
-    bio = models.TextField()
+    bio = models.TextField(blank=True, default="hello, i'm on JOT!")
 
     def __str__(self):
-        return self.Users.username
+        return self.user.username
 
     class Meta:
         verbose_name = 'UserProfile'
         verbose_name_plural = 'UserProfiles'
+
+#These functions just update the related User Model when the UserProfile gets updated
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+#@receiver(post_save, sender=User)
+#def save_user_profile(sender, instance, **kwargs):
+#    print(type(instance))
+#    instance.UserProfile.save()
 
 
