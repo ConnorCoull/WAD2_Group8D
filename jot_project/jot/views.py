@@ -16,36 +16,23 @@ from .models import Users
 #from somewhere import handle_uploaded_file
 
 def index(request):
-    model = Book
-    model = Users
-    keyword = request.GET.get('q')
-    chosen_category = request.GET.get('chosen_category')
     context_dict = {}
-    if chosen_category == "user":
-        print(chosen_category)
-        print(keyword)
-        if keyword:
-            # author
-         users_list = Users.objects.filter(username__icontains = keyword)
-         print(users_list)
+    top_books_list = Book.objects.order_by('-book_views')[:10]
+    context_dict['top_books_list'] = top_books_list
 
-         context_dict['users_list'] = users_list
+    keyword = request.GET.get('query-input')
+    chosen_category = request.GET.get('chosen-category')
 
+    if keyword:
+        if chosen_category == "user":
+            context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
+            
+        elif chosen_category == "book":
+            context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
 
-
-    if chosen_category == "book":
-        if keyword:
-            # author
-         books_list = Book.objects.filter(book_title__icontains = keyword)
-         print(books_list)
-
-         context_dict['books_list'] = books_list
-    #    context_dict['author_list'] = author_list
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    #    return render(request, 'jot/index.html', context=context_dict)
     return render(request, 'jot/index.html', context=context_dict)
-
 
 def about(request):
     context_dict = {}
@@ -77,6 +64,8 @@ def surpriseme(request):
     return render(request, 'jot/surpriseme.html', context=context_dict)
 
 def book(request, pk):
+    #may need to take a random book
+
     context_dict = {
         'star1':'white-star',
         'star2':'white-star',
@@ -85,30 +74,22 @@ def book(request, pk):
         'star5':'white-star',}
 
     try:
-        print("MADE IT")
         book = Book.objects.get(bookID=pk)
-        print(book)
+        GoogleBooksApiFeedback = getRatings(book.book_title) #grab this from the book data/ api
+
+        rating = GoogleBooksApiFeedback[0]
+        rating = floor(rating+0.5)
+
+        for count in range(rating):
+            context_dict['star'+str(count+1)] = 'yellow-star'
+
         context_dict['book'] = book
+        context_dict["total_reviews"] = GoogleBooksApiFeedback[1]
     except Book.DoesNotExist:
         context_dict['book'] = None
 
-
-    #this will take an argument of a page fetched at random
-    #fetch book here
-
-    GoogleBooksApiFeedback = getRatings(book.book_title) #grab this from the book data/ api
-    rating = GoogleBooksApiFeedback[0]
-    context_dict["total_reviews"] = GoogleBooksApiFeedback[1]
-    rating = floor(rating+0.5)
-
-    test_star_colour = ['white-star'] * rating
-    for count in range(rating):
-        context_dict['star'+str(count+1)] = 'yellow-star'
-
     visitor_cookie_handler(request)
-
     context_dict['visits'] = request.session['visits']
-
     return render(request, 'jot/book.html', context=context_dict)
 
 def searchresults(request):
