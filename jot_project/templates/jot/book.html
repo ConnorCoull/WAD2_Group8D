@@ -5,7 +5,7 @@
 <p class="main-paragraph">{{ book.book_description }}</p>
 <div class="book-div">
   <div class="book-link">
-    <a href="media/Moby_Dick_PDF_tfwn1F5.pdf" target="_blank">{{ book.book_title }}</a>
+    <a href="{{ book.book_file_path }}" target="_blank">{{ book.book_title }}</a>
   </div>
   <div class="download-symbol">
     <a href="{{ book.pdf_upload }}" download><i class="fas fa-arrow-down"></i></a>
@@ -30,6 +30,6 @@
     Navigate to your downloads folder <br />
     Click on the file icon called {{ book.pdf_upload }}
   </div>
-  <script src="{% static 'script.js' %}"></script>
+  <script src="{% static 'javascript/script.js' %}"></script>
 </div>
 {% endblock %}
