@@ -7,6 +7,11 @@ body {
   background-color: #f4f4f4;
   font-family: "Poppins", sans-serif;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .bar {
   position: relative;
   background-color: #5c6274;
@@ -29,7 +34,7 @@ body {
   color: #5c6274;
   height: 100%;
   padding-top: 0.5%;
-  width: 5%;
+  min-width: 5%;
   border-style: solid;
   border-color: #f4f4f4;
   position: fixed;
@@ -75,7 +80,9 @@ body {
   top: 0;
   left: 0;
   width: 84.5%;
-  height: 80%;
+  min-height: 80%;
+  height: auto;
+  max-height: 100vh;
   background-color: #f4f4f4;
   position: relative;
   float: right;
@@ -116,7 +123,9 @@ body {
 }
 
 #footer {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   height: 5%;
   width: 81%;
   float: right;
@@ -212,8 +221,7 @@ ul.navbar li a {
   position: absolute;
   text-align: left;
   width: 76%;
-  height: 5%;
-  top: 40%;
+  top: 60%;
   left: 10%;
   padding-top: 2%;
   padding-bottom: 2%;
@@ -229,7 +237,7 @@ ul.navbar li a {
   text-align: left;
   width: 80%;
   height: 10%;
-  top: 25%;
+  top: 47.5%;
   left: 10%;
 }
 
@@ -254,10 +262,12 @@ ul.navbar li a {
 .accordion {
   position: absolute;
   left: 10%;
-  top: 60%;
+  top: 70%;
   width: 80%;
   height: 30%;
   background-color: #f4f4f4;
+  margin-bottom: 2.5%;
+
 }
 
 .accordion-button {
@@ -308,7 +318,7 @@ ul.navbar li a {
 }
 
 .accordion-content {
-  position: absolute;
+  position: relative;
   display: block;
   top: 20%;
   width: 96%;
@@ -339,3 +349,30 @@ ul.navbar li a {
   margin: 0;
   float: right;
 }
+
+.yellow-star {
+  color: #ffd800;
+}
+
+.white-star {
+  color: #f4f4f4;
+}
+
+.results-block {
+  color: #f4f4f4;
+  background-color: #5c6274;
+  position: absolute;
+  width: 35%;
+  height: 60%;
+  top: 25%;
+  padding: 5%;
+}
+
+.books-results {
+  left: 3%;
+}
+
+.user-results{
+  left: 50%
+}
+
