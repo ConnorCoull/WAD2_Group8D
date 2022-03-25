@@ -68,10 +68,9 @@ class Book(models.Model):
     )
 
     book_category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
-    book_title = models.CharField(max_length=30)
-    author = models.CharField(max_length=32)
-
-    book_description = models.CharField(max_length=250)
+    book_title = models.CharField(max_length=128)
+    author = models.CharField(max_length=64)
+    book_description = models.CharField(max_length=1024)
 
     pdf_upload = models.FileField(upload_to = '')
     uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
