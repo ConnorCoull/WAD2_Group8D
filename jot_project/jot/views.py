@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+from .GoogleBookSearchAPI import getRatings
 
 #call the upload function in Forms
 from .forms import BookForm, UserProfileForm
@@ -75,18 +76,34 @@ def surpriseme(request):
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/surpriseme.html', context=context_dict)
 
-def book(request):
+def book(request, pk):
+    context_dict = {
+        'star1':'white-star',
+        'star2':'white-star',
+        'star3':'white-star',
+        'star4':'white-star',
+        'star5':'white-star',}
+
+    try:
+        print("MADE IT")
+        book = Book.objects.get(bookID=pk)
+        print(book)
+        context_dict['book'] = book
+    except Book.DoesNotExist:
+        context_dict['book'] = None
+
+
     #this will take an argument of a page fetched at random
     #fetch book here
-    
-    context_dict = {}
 
-    rating = 3.41564455554345345345 #grab this from the book data/ api
+    GoogleBooksApiFeedback = getRatings(book.book_title) #grab this from the book data/ api
+    rating = GoogleBooksApiFeedback[0]
+    context_dict["total_reviews"] = GoogleBooksApiFeedback[1]
     rating = floor(rating+0.5)
 
-    test_star_colour = ['#f4f4f4'] * rating
+    test_star_colour = ['white-star'] * rating
     for count in range(rating):
-        context_dict['star'+str(count+1)] = '#ffd800'
+        context_dict['star'+str(count+1)] = 'yellow-star'
 
     visitor_cookie_handler(request)
 
