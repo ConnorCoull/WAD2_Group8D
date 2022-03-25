@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+from .GoogleBookSearchAPI import getRatings
 from django.contrib.auth.decorators import login_required
 
 #call the upload function in Forms
