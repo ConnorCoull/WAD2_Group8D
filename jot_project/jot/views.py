@@ -117,14 +117,14 @@ def visitor_cookie_handler(request):
     request.session['visits'] = visits
   
     
-# If anyone want to change the page after uploading successfully, modify return redirect('index') 
+# If anyone want to change the page after uploading successfully, modify return redirect('book') 
 @login_required
 def upload_books(request):
     if request.method == 'POST' :
         form = BookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('book')
     else:
         form = BookForm()
         
