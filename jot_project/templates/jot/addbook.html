@@ -1,13 +1,16 @@
 {% extends 'jot/base.html' %}
 
+{% if current_user.is_authenticated %}
+
 {% block title_block %}
-<h2>UploadBooks</h2> 
+<h2><a href = "{% url 'rango:restricted' %}">UploadBooks</a></h2> 
 {%endblock %}
 {% block body_block %}
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn_primary">Upload book</button>
+ {{form.as_p}}
+<button type="submit" class="btn btn_success">Upload book</button>
 </form>
 
 {% endblock %}
+{% endif %}

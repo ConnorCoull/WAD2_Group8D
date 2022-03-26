@@ -117,8 +117,10 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
-#i
-#required login?
+  
+    
+# If anyone want to change the page after uploading successfully, modify return redirect('index') 
+@login_required
 def upload_books(request):
     if request.method == 'POST' :
         form = BookForm(request.POST,request.FILES)
