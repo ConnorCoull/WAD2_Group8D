@@ -11,6 +11,7 @@ from django.conf import settings
 
 from .models import Book
 from .models import Users
+from django.contrib.auth.decorators import login_required
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
