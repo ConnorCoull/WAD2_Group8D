@@ -1,16 +1,17 @@
 {% extends 'jot/base.html' %}
 
-{% if current_user.is_authenticated %}
+
 
 {% block title_block %}
 <h2>UploadBooks</h2> 
 {%endblock %}
 {% block body_block %}
+{% if current_user.is_authenticated %}
 <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_p }}
 <button type="submit" class="btn btn_primary">Upload book</button>
 </form>
-
-{% endblock %}
 {% endif %}
+{% endblock %}
+
