@@ -1,4 +1,5 @@
 from math import floor
+import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
@@ -56,10 +57,9 @@ def categories(request):
     return render(request, 'jot/categories.html', context=context_dict)
 
 def surpriseme(request):
-    context_dict = {}
-    visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
-    return render(request, 'jot/surpriseme.html', context=context_dict)
+    book_ids = [book.bookID for book in Book.objects.all()]
+    random_book = random.randrange(0, max(book_ids))
+    return book(request, random_book.bookID)
 
 def book(request, pk):
     #may need to take a random book
@@ -132,8 +132,8 @@ def upload_books(request):
 
 #Matthew: here we alow users to edit thier bio, user type and proficle pic, email adress
 #and usernmae cannot be changed, chaging password is seperate 
-def edit_profile(request):
-    if request.method == 'POST' :
-        profile_form = UserProfileForm(request.POST)
-        if profile_form.is_valid():
-            profile_form.save()
+#def edit_profile(request):
+#    if request.method == 'POST' :
+#        profile_form = UserProfileForm(request.POST)
+#        if profile_form.is_valid():
+#            profile_form.save()
