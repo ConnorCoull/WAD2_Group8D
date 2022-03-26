@@ -2,22 +2,34 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE','jot_project.settings')
 import django
 django.setup()
-from jot.models import Users, Book, Review, Category
+from jot.models import Book, Review, Category
+from django.contrib.auth.models import User
 
 def populate():
        
 
-    #The population script takes the information in the form of a list of dictionaries.
-    #This allows us to easily loop through and get the values we need and pass them to our add model functions.
+    # The population script takes the information in the form of a list of dictionaries.
+    # This allows us to easily loop through and get the values we need and pass them to our add model functions.
+
+    # We had our own user and admin classes at one point but this was scrapped because it is much more useful
+    # to use the built in user model
+
+    
+    User.objects.all().delete
+    Review.objects.all().delete
+    Book.objects.all().delete
+
+
+
 
     test_users = [
        
-        {'username': 'OnionGuy34672', 'user_password':'password', 'user_type' : True, 'user_email' : 'OnionGuy34672@gmail.com'},
-        {'username': 'coolAsACucumber', 'user_password':'password', 'user_type' : True, 'user_email' : 'coolAsACucumber@gmail.com'},
-        {'username': 'DrPepperLover', 'user_password':'password', 'user_type': False, 'user_email' : 'DrPepperLover@gmail.com'},
-        {'username': 'pomeranianWriter', 'user_password': 'password', 'user_type': True, 'user_email' : 'pomeranian86345writer@gmail.com'},   
-        {'username': 'Geezer5623', 'user_password': 'password', 'user_type': False, 'user_email' : 'geezerinnit@gmail.com'} ,
-        {'username': 'readTheMostBooksEver', 'user_password': 'password', 'user_type': False, 'user_email' : 'bookEnthusiast@gmail.com'},            
+        {'username': 'OnionGuy34672', 'password':'password','email' : 'OnionGuy34672@gmail.com'},
+        {'username': 'coolAsACucumber', 'password':'password', 'email' : 'coolAsACucumber@gmail.com'},
+        {'username': 'DrPepperLover', 'password':'password', 'email' : 'DrPepperLover@gmail.com'},
+        {'username': 'pomeranianWriter', 'password': 'password','email' : 'pomeranian86345writer@gmail.com'},   
+        {'username': 'Geezer5623', 'password': 'password','email' : 'geezerinnit@gmail.com'} ,
+        {'username': 'readTheMostBooksEver', 'password': 'password','email' : 'bookEnthusiast@gmail.com'},            
         ]
 
     test_books = [
@@ -44,9 +56,6 @@ def populate():
          to look for his ipad, which he swears he put somewhere near the indian ocean.''', 'uploaded_by':'pomeranianWriter',
          'book_date_published':'2009-01-01', 'book_average_rating' : 2, 'book_file_path': 'jot/media', 'book_category': 'Fiction', 'book_views': 82},
 
-
-
-
         ]   
 
 
@@ -69,12 +78,23 @@ def populate():
         ]
 
 
+    # The for loops loop through the dictionaires and pass the values as arguments to the
+    # appropriate functions
 
-    
     for u in test_users:
-        add_user(u['username'], u['user_password'], u['user_type'], u['user_email'])
+        add_user(u['username'], u['password'],u['email'])
 
 
+    # This might look a bit odd so I'll give an explanation.
+    # The counter is set to zero at the beginning, this variable tells us which index (dictionary)
+    # we are at in the loop.
+    # We first loop through the dictionaires in the list.
+    # Then we loop through the key value pairs in a given dictionary.
+    # This is when our counter comes into use.
+    # This allows us to access each dictionary seperately.
+    # We use a if statement to find the category of the dictionary and add the category.
+    # We then fill in the values and increment the counter so that next time it loops 
+    # round it will take the next dictionary.
     counter = 0
     for i in test_books:
         for key,value in test_books[counter].items():
@@ -83,7 +103,6 @@ def populate():
                 add_book(c, i['book_title'], i['author'], i['book_description'], i['uploaded_by'], i['book_date_published'], 
                 i['book_average_rating'], i['book_file_path'], i['book_category'], i['book_views'])
         counter +=1
-        print("This is the counter number", counter)
 
     for c in Category.objects.all():
         for b in Book.objects.filter(book_category=c):
@@ -92,12 +111,14 @@ def populate():
     for r in test_reviews:
         add_review( r['review_book'], r['reviewer'], r['review_rating'], r['review_date_written'], r['review_content'])
 
+    # Here are the functions used to add the information to the database.
+    # Note that when other objects are creating within one of these functions
+    # This is for the foreign keys.
 
-def add_user(username, user_password, user_type, user_email):
-    u = Users.objects.get_or_create(username=username)[0]
-    u.user_password=user_password
-    u.user_type=user_type
-    u.user_email=user_email
+def add_user(username, password, email):
+    u = User.objects.get_or_create(username=username)[0]
+    u.password=password
+    u.email=email
     u.save()
     return u
 
@@ -105,7 +126,7 @@ def add_book(cat, book_title, author, book_description, uploaded_by, book_date_p
     b = Book.objects.get_or_create(book_title=book_title)[0]
     c = Category.objects.get_or_create(category_name=cat)[0]
     c2 = Category.objects.get_or_create(category_name=book_category)[0]
-    u = Users.objects.get_or_create(username=uploaded_by)[0]
+    u = User.objects.get_or_create(username=uploaded_by)[0]
     b.cat = c
     b.author=author
     b.book_description=book_description
@@ -122,7 +143,7 @@ def add_book(cat, book_title, author, book_description, uploaded_by, book_date_p
 def add_review(review_book, reviewer, review_rating, review_date_written, review_content):
     b = Book.objects.get_or_create(book_title=review_book)[0]
     r = Review.objects.get_or_create(review_book=b)[0]
-    u = Users.objects.get_or_create(username=reviewer)[0]
+    u = User.objects.get_or_create(username=reviewer)[0]
     r.reviewer = u
     r.review_rating=review_rating
     r.review_date_written=review_date_written
@@ -138,6 +159,13 @@ def add_category(category_name):
 
 
 
+
+
+
 if __name__ == "__main__":
     print("Populating script...")
     populate()
+    
+    print(User.objects.all())
+    print(Book.objects.all())
+    print(Review.objects.all())
