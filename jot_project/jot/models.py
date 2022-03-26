@@ -1,9 +1,9 @@
 from django.db import models 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-import uuid
+#from django.db.models.signals import post_save
+#from django.dispatch import receiver
+import uuid #is this a complete import? uuid not used anywhere. - Connor
 from django.template.defaultfilters import slugify
 
 # Models.py
@@ -134,10 +134,10 @@ class UserProfile(models.Model):
         verbose_name_plural = 'UserProfiles'
 
 #This function just updates the related User Model when the UserProfile gets updated
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+#@receiver(post_save, sender=User)
+#def create_user_profile(sender, instance, created, **kwargs):
+#    if created:
+#        UserProfile.objects.create(user=instance)
 
 
 
