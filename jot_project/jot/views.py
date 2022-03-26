@@ -55,9 +55,6 @@ def categories(request):
     return render(request, 'jot/categories.html', context=context_dict)
 
 def surpriseme(request):
-    #this will take an argument of a page fetched at random
-
-    #potentually get rid of all of this and in the return return a page.html response??
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
