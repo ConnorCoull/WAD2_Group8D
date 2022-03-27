@@ -21,20 +21,6 @@ from django.template.defaultfilters import slugify
 
 # Note the user_type is a boolean value that stores whether the user is a reader or a writer. 
 # The user_type is simply just for display purposes on the users profile and has no other effect.
-#
-# FROM Matthew: shouldnt the UserProfile model below that links to the django user model be used?              
-class Users(models.Model):
-    username = models.CharField(max_length=64, unique=True)
-    user_password = models.CharField(max_length=64)
-    user_type = models.BooleanField(default=False)
-    user_email = models.CharField(max_length=128, unique=True)
-
-    def __str__(self):
-        return self.username
-    
-    class Meta:
-        verbose_name = 'Users'
-        verbose_name_plural = 'Users'
 
 
 class Category(models.Model):
@@ -66,7 +52,7 @@ class Book(models.Model):
     author = models.CharField(max_length=64)
     book_description = models.CharField(max_length=1024)
     pdf_upload = models.FileField(upload_to = '')
-    uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     book_average_rating = models.PositiveIntegerField(
         default = 1,
@@ -98,7 +84,7 @@ class Review(models.Model):
     
     reviewID = models.AutoField(primary_key=True)
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
-    reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     review_rating = models.IntegerField( 
         
         default = 1,
