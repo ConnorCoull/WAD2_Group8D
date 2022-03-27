@@ -123,6 +123,15 @@ def category(request, category_slug):
         context_dict['category'] = None
     return render(request, 'jot/category.html', context=context_dict)
 
+def review(request, pk):
+    context_dict = {}
+
+    try:
+        reviews = Review.objects.get()
+    except: review.DoesNotExist:
+        context_dict['reviews'] = None
+    return render(request, 'jot/contactus.html', context=context_dict)#remember to replace contactus!!!!!
+    
 # If anyone want to change the page after uploading successfully, modify return redirect('book') 
 @login_required
 def upload_books(request):
@@ -168,11 +177,3 @@ def visitor_cookie_handler(request):
 #        profile_form = UserProfileForm(request.POST)
 #        if profile_form.is_valid():
 #            profile_form.save()
-
-
-def pdf_view(request, pk):
-    book = Book.objects.get(pk=pk)
-    filename = str(book.pdf_upload)
-    filepath = os.path.join(settings.MEDIA_ROOT, filename)
-
-    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
