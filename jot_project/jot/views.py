@@ -8,6 +8,8 @@ from datetime import datetime
 from django.urls import reverse
 from .GoogleBookSearchAPI import getRatings
 import os
+from .models import Book
+from .models import User
 
 #call the upload function in Forms
 from .forms import BookForm, UserProfileForm
@@ -91,7 +93,7 @@ def searchresults(request):
 
     if keyword:
        
-            context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
+            context_dict['users_list'] = User.objects.filter(username__icontains = keyword)
             context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
 
     visitor_cookie_handler(request)
