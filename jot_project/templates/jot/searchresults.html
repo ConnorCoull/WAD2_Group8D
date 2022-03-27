@@ -16,7 +16,7 @@ Query
     {% for book in books_list %}
     <li>
       <a href="{% url 'jot:book' pk=book.bookID %}">{{book.book_title}}</a>
-    </li>
+    </li><br />
     {% endfor %} {% else %}
     <strong>No books match your query.</strong>
     {% endif %}
@@ -29,7 +29,7 @@ Query
     {% for user in users_list %}
     <li>
       <a href="#">{{ user }}</a>
-    </li>
+    </li><br />
     {% endfor %}
     {% else %}
     <strong>No users match your query</strong>

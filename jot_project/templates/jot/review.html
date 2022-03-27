@@ -8,7 +8,7 @@
     <h1 class="h1-title-block">book.name reviews:</h1><br />
     {% if reviews %}
         {% for review in reviews %}
-            <li><h3 class="h3-subtitle-block">review.rating/5</h3>
+            <li><h3 class="h3-subtitle-block">review.username - review.rating/5 - review.date</h3>
                 <br />
                 <p class="main-paragraph">review.content</li>
         {% endfor %}

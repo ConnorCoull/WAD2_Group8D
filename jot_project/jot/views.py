@@ -15,7 +15,7 @@ from .models import User
 from .forms import BookForm, UserProfileForm
 from django.conf import settings
 
-from .models import Book, Category
+from .models import Book, Category, Review
 from django.contrib.auth.decorators import login_required
 
 # Imaginary function to handle an uploaded file.
@@ -121,15 +121,25 @@ def category(request, category_slug):
     except category.DoesNotExist:
         context_dict['books'] = None
         context_dict['category'] = None
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
     return render(request, 'jot/category.html', context=context_dict)
 
 def review(request, pk):
     context_dict = {}
     try:
-        reviews = Review.objects.get()
+        book = Book.objects.get(bookID=pk)
+        context_dict['book'] = book
+    except book.DoesNotExist:
+        context_dict['book'] = None
+    try:
+        reviews = Review.objects.get(review_book=pk)
+        context_dict['reviews'] = reviews
     except review.DoesNotExist:
         context_dict['reviews'] = None
-    return render(request, 'jot/contactus.html', context=context_dict)#remember to replace contactus!!!!!
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'jot/review.html', context=context_dict)#remember to replace contactus!!!!!
 
 # If anyone want to change the page after uploading successfully, modify return redirect('book') 
 @login_required

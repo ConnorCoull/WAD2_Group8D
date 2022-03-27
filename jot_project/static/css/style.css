@@ -385,6 +385,12 @@ ul.navbar li a {
   padding: 5%;
 }
 
+.books-list li a{
+  color: #f4f4f4;
+  text-decoration: none;
+  padding-left: 15%;
+}
+
 .books-results {
   left: 5%;
 }
@@ -397,13 +403,14 @@ ul.navbar li a {
   background-color: #5c6274;
   color: #f4f4f4;
   float: right;
-  width: 68%;
+  width: 78%;
   height: 100%;
   border: none;
 }
 
 .search-bar:focus{
   outline: none;
+  box-shadow: none;
 }
 
 .search-bar::placeholder{
@@ -417,6 +424,7 @@ ul.navbar li a {
   background-color: #5c6274;
   color: #f4f4f4;
   border: none;
+  font-size: 1vw;
 }
 
 #choose-list{
