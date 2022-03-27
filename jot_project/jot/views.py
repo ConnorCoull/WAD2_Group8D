@@ -125,13 +125,12 @@ def category(request, category_slug):
 
 def review(request, pk):
     context_dict = {}
-
     try:
         reviews = Review.objects.get()
-    except: review.DoesNotExist:
+    except review.DoesNotExist:
         context_dict['reviews'] = None
     return render(request, 'jot/contactus.html', context=context_dict)#remember to replace contactus!!!!!
-    
+
 # If anyone want to change the page after uploading successfully, modify return redirect('book') 
 @login_required
 def upload_books(request):
