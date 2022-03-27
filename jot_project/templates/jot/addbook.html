@@ -1,17 +1,19 @@
 {% extends 'jot/base.html' %}
-
+{% load static %}
 
 
 {% block title_block %}
-<h2>UploadBooks</h2> 
+Upload a Book 
 {%endblock %}
+
 {% block body_block %}
-{% if current_user.is_authenticated %}
-<form method="post" enctype="multipart/form-data">
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn_primary">Upload book</button>
-</form>
-{% endif %}
+<h1 class="h1-title-block">Add a Book</h1><br />
+<div class="form-div">
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn_primary">Upload book</button>
+    </form>
+</div>
 {% endblock %}
 

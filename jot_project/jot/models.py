@@ -127,6 +127,8 @@ class UserProfile(models.Model):
         self.slug = slugify(self.user.username)
         super(UserProfile, self).save(*args, **kwargs)
 
+  
+
     def __str__(self):
         return self.user.username
 
@@ -134,7 +136,9 @@ class UserProfile(models.Model):
         verbose_name = 'UserProfile'
         verbose_name_plural = 'UserProfiles'
 
+
 #Below is not Marks
+
 
 #This function just updates the related User Model when the UserProfile gets updated
 #@receiver(post_save, sender=User)
