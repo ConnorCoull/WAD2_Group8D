@@ -25,7 +25,6 @@
       integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
       crossorigin="anonymous"
     ></script>
-    <script src="{% static 'javascript/script.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,9 +32,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="{% static 'javascript/script.js' %}"></script>
   </head>
   <body>
-    <div class="logo"><h1>JOT</h1></div>
+    <div class="logo"><a href="{% url 'jot:index' %}"><h1>JOT</h1></a></div>
     <div class="bar" id="bar-one">
       <div id="login-block">Login stuff here</div>
     </div>

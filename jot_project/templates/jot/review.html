@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-
-
-<html>
-    <head>
-        <title>
-            JOT
-        </title>
-    </head>
-    <body>
-        <div><h1>JOT<h1> remember the o is an on-click event to load a random page</div>
-        <div>Login stuff here</div>
-        <div>Page links here</div>
-        <div>the sidebar goes here, maybe needs 2 divs</div>
-        <div>remember and use css to make this work on laptop and mobile if possible</div>
-        <!-- above is all header block-->
-        <div>todo</div>
-        <!-- below this is the footer block-->
-        <div>Footer</div>
-    </body>
-</html>
+{% extends 'jot/base.html' %}
+{% load static %}
+{% block title_block %}
+    Reviews
+{%endblock %}
+{% block body_block %}
+    <!--main should become a scroll div but if now make one here -->
+    <h1 class="h1-title-block">book.name reviews:</h1><br />
+    {% if reviews %}
+        {% for review in reviews %}
+            <li><h3 class="h3-subtitle-block">review.rating/5</h3>
+                <br />
+                <p class="main-paragraph">review.content</li>
+        {% endfor %}
+    {% else %}
+        <strong>This book has no reviews! add one(link)?</strong>
+    {% endif %}
+{% endblock %}

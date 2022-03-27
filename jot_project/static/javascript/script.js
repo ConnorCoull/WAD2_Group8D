@@ -15,3 +15,28 @@ document.querySelectorAll(".accordion-button").forEach((button) => {
     }
   });
 });
+
+$(document).ready(function () {
+  var eT=0;
+  $('.books-list li').hide().each(function (i) {
+  $(this).delay(eT).fadeIn(1000);
+  eT += 400; // Fade in speed
+  });
+  
+  $('.logo').hide().each(function () {
+    $(this).fadeIn(5000);
+  });
+
+  $('.h3-subtitle-block').hide().each(function (i) {
+    $(this).delay(eT).fadeIn(2500);
+  });
+
+  $('.main-paragraph').hide().each(function (i) {
+    $(this).delay(eT).fadeIn(2500);
+  });
+
+  $('.svg-inline--fa').hide().each(function (i) {
+    $(this).delay(eT).fadeIn(2500);
+  })
+
+});
