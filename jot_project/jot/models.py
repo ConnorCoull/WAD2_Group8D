@@ -18,7 +18,6 @@ from django.template.defaultfilters import slugify
 # The user_type is simply just for display purposes on the users profile and has no other effect.
 
 
-
 class Category(models.Model):
     category_name = models.CharField(max_length = 64, unique=True) 
     slug = models.SlugField()
