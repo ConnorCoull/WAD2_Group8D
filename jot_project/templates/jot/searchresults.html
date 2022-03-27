@@ -1,36 +1,37 @@
-{% extends 'jot/base.html' %} 
+{% extends 'jot/base.html' %}
 {% load static %}
 {% block title_block%}
-    {% if query %}
-        {{ query.book_title }}
-    {% else %}
-        Query
-    {% endif %} 
+{% if query %}
+{{ query.book_title }}
+{% else %}
+Query
+{% endif %}
 {% endblock %}
 {% block body_block %}
-<h3 class="h3-subtitle-block">Results for {query}</h3>
+<h3 class="h3-subtitle-block">Results for {{query}}</h3>
 <div class="results-block books-results">
   <strong>Book Results:</strong><br /><br />
   {% if books_list %}
   <ul class="books-list">
     {% for book in books_list %}
     <li>
-      <a href="{% url 'jot:book' %}">{{ book.title }}</a>
+      <a href="{% url 'jot:book' pk=book.bookID %}">{{ book }}</a>
     </li>
     {% endfor %} {% else %}
     <strong>No books match your query.</strong>
     {% endif %}
-  </ul>
+
 </div>
 <div class="results-block user-results">
   <strong>User Results:</strong><br /><br />
-  {% if users_lists %}
+  {% if users_list %}
   <ul class="books-list">
     {% for user in users_list %}
     <li>
-      <a href="{% url 'jot:user' %}">{{ user.username }}</a>
+      <a href="#">{{ user }}</a>
     </li>
-    {% endfor %} {% else %}
+    {% endfor %}
+    {% else %}
     <strong>No users match your query</strong>
     {% endif %}
   </ul>

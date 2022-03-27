@@ -1,4 +1,5 @@
 from math import floor
+from pyexpat import model
 import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -21,17 +22,6 @@ def index(request):
     context_dict = {}
     top_books_list = Book.objects.order_by('-book_views')[:10]
     context_dict['top_books_list'] = top_books_list
-
-    keyword = request.GET.get('query-input')
-    chosen_category = request.GET.get('chosen-category')
-
-    if keyword:
-        if chosen_category == "user":
-            context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
-            
-        elif chosen_category == "book":
-            context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
-
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/index.html', context=context_dict)
@@ -92,8 +82,20 @@ def book(request, pk):
 
 def searchresults(request):
     context_dict = {}
+    keyword = request.GET.get('query-input')
+    chosen_category = request.GET.get('chosen-category')
+
+    if keyword:
+        if chosen_category == "user":
+            context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
+            print(context_dict['users_list'])
+            
+        elif chosen_category == "book":
+            context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
+            print(context_dict['books_list'])
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
+    context_dict['query'] = keyword
     return render(request, 'jot/searchresults.html', context=context_dict)
 
 # Not a view, this is just a helper function

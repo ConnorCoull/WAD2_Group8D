@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body_block %}
 <div id="search-bar">
-  <form class="search-form" action="{% url 'index' %}" method="get">
+  <form class="search-form" action="{% url 'jot:searchresults' %}" method="get">
     <button class="submit-button" type="submit">Search</button>
     <select id="choose-list" name="chosen-category">
       <option value="user">user</option>
