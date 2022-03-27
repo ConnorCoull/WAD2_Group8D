@@ -4,27 +4,30 @@
   Home
 {% endblock %}
 {% block body_block %}
-        <div id="search-bar">
-            <div id="search-bar-button">
-              <form class="search" action="{% url 'index' %}" method="get">
-                <input class="keyword" name="q" type="text" placeholder="Search...">
-                <button class="btn" type="submit">Search</button>
-              </form>
-            </div>
-        </div>
-        <div class="name-block">
-          <strong>Top Reads:</strong>
-          {% if books_list %}
-          <ul class="books-list">
-            {% for book in books_list %}
-            <li>
-              <a href="{% url 'jot:book' %}">{{ book }}</a>
-            </li>
-            {% endfor %}
-          {% else %}
-          <strong>There are no pages present</strong>
-          {% endif %}
-          </ul>
-        </div>
-      </div>
+<div id="search-bar">
+  <form class="search-form" action="{% url 'index' %}" method="get">
+    <button class="submit-button" type="submit">Search</button>
+    <select id="choose-list" name="chosen-category">
+      <option value="user">user</option>
+      <option value="book">book</option>
+    </select>
+    <input class="search-bar" name="query-input" type="text" placeholder="Search...">
+  </form>
+</div>
+<div class="name-block">
+  <strong>Top Reads:</strong><br /><br />
+  {% if top_books_list %}
+    <ul class="books-list">
+      {% for book in top_books_list %}
+        <li class="top-book-link">
+          <a href="{% url 'jot:book' book.bookID %}">{{ book.book_title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+  <strong>There are no pages present</strong>
+  {% endif %}
+  
+</div>
+</div>
 {% endblock %}
