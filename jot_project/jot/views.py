@@ -90,7 +90,6 @@ def searchresults(request):
             
         elif chosen_category == "book":
             context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
-            print(context_dict['books_list'])
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['query'] = keyword
