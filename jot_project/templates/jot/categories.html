@@ -1,8 +1,20 @@
-{% extends 'jot/base.html' %} {% load static %} {% block title_block %}
-Categories {%endblock %} {% block body_block %}
-<h1 class="h1-title-block">Category is: You Choose!</h1>
-<p class="main-paragraph">
-  This will display links to our categories, each of which will feature pages
-  relevant to that category
-</p>
+{% extends 'jot/base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+  Categories
+{%endblock %}
+
+{% block body_block %}
+  {% if categories %}
+    <h1 class="h1-title-block">Categories</h1>
+    <ul>
+    {% for category in categories %}
+    <li><a href="{% url 'jot:categories' category.slug %}"><h3 class="h3-subtitle-block">category.category_name</h3></a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <h3 class="h3-subtitle-block">No categories?? You shouldn't be seeing this... BEHIND YOU!</h3>
+  {% endif %}
 {% endblock %}

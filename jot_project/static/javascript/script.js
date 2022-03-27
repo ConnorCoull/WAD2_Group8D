@@ -1,3 +1,4 @@
+//JavaScript
 document.querySelectorAll(".accordion-button").forEach((button) => {
   button.addEventListener("click", () => {
     const accordionContent = button.nextElementSibling;
@@ -16,6 +17,7 @@ document.querySelectorAll(".accordion-button").forEach((button) => {
   });
 });
 
+//JQuery
 $(document).ready(function () {
   var eT=0;
   $('.books-list li').hide().each(function (i) {
@@ -24,7 +26,7 @@ $(document).ready(function () {
   });
   
   $('.logo').hide().each(function () {
-    $(this).fadeIn(5000);
+    $(this).fadeIn(2500);
   });
 
   $('.h3-subtitle-block').hide().each(function (i) {
@@ -40,3 +42,5 @@ $(document).ready(function () {
   })
 
 });
+
+//AJAX

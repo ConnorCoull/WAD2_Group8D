@@ -1,10 +1,31 @@
 {% extends 'jot/base.html' %}
 {% load static %}
+
 {% block title_block %}
     user.username
-{%endblock %}
+{% endblock %}
+
 {% block body_block %}
-    <div class="profile-picture"></div>
-    <div class="user-profile-information"></div>
-    <div class="user books"></div>
+    {% if user %}
+        <div class="image-container">
+            <!--<div class="profile-picture"></div>-->
+        </div>
+        <div class="user-profile-information"><h3 class="h3-subtitle-block">username</h3><br /><p class="main-paragraph">bio</p></div>
+        <div class="user books">
+            Need to get the users 3 highest rated books then for book in books then add a special + at the end
+            {% if user_books %}
+                <ul>
+                    {% for book in user_books %}
+                        <li>link to the book</li>
+                    {% endfor %}
+                    <li id="see-more-books"> the extra link </li>
+                </ul>
+            {% else %}
+                <h3 class="h3-subtitle-block">This user has no books</h3>
+            {% endif %}
+
+        </div>
+    {% else %}
+        <h3 class="h3-subtitle-block">This user appears to not exist.... mysterious...</h3>
+    {% endif %}
 {% endblock %}

@@ -15,7 +15,7 @@ from .models import User
 from .forms import BookForm, UserProfileForm
 from django.conf import settings
 
-from .models import Book
+from .models import Book, Category
 from django.contrib.auth.decorators import login_required
 
 # Imaginary function to handle an uploaded file.
@@ -36,15 +36,14 @@ def about(request):
     return render(request, 'jot/about.html', context=context_dict)
 
 def contactus(request):
-    #maybe a dictionary of our information would be useful
     context_dict = {}
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/contactus.html', context=context_dict)
 
 def categories(request):
-    #we will need to collect the categories here, this will require a context dict
     context_dict = {}
+    context_dict['categories'] = [category for category in Category.objects.all()]
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/categories.html', context=context_dict)
@@ -55,9 +54,13 @@ def surpriseme(request):
     print(random_book)
     return redirect(f'/jot/book/{random_book}')
 
-def book(request, pk):
-    #may need to take a random book
+def userpage(request, user_slug):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'jot/contactus.html', context=context_dict)#remember to replace contactus!!!!!
 
+def book(request, pk):
     context_dict = {
         'star1':'white-star',
         'star2':'white-star',
@@ -68,7 +71,7 @@ def book(request, pk):
 
     try:
         book = Book.objects.get(bookID=pk)
-        GoogleBooksApiFeedback = getRatings(book.book_title) #grab this from the book data/ api
+        GoogleBooksApiFeedback = getRatings(book.book_title)
 
         rating = GoogleBooksApiFeedback[0]
         rating = floor(rating+0.5)
@@ -86,6 +89,12 @@ def book(request, pk):
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/book.html', context=context_dict)
 
+def pdf_view(request, pk):
+    book = Book.objects.get(pk=pk)
+    filename = str(book.pdf_upload)
+    filepath = os.path.join(settings.MEDIA_ROOT, filename)
+    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
 def searchresults(request):
     context_dict = {}
     keyword = request.GET.get('query-input')
@@ -101,7 +110,35 @@ def searchresults(request):
     context_dict['query'] = keyword
     return render(request, 'jot/searchresults.html', context=context_dict)
 
-# Not a view, this is just a helper function
+def category(request, category_slug):
+    context_dict = {}
+
+    try:
+        category = Category.objects.get(slug=category_slug)
+        books = Book.objects.filter(book_category=category)
+        context_dict['books'] = books
+        context_dict['category'] = category
+    except category.DoesNotExist:
+        context_dict['books'] = None
+        context_dict['category'] = None
+    return render(request, 'jot/category.html', context=context_dict)
+
+# If anyone want to change the page after uploading successfully, modify return redirect('book') 
+@login_required
+def upload_books(request):
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    if request.method == 'POST' :
+        form = BookForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('book')
+    else:
+        form = BookForm()
+    context_dict['form'] = form        
+    return render(request,'jot/addbook.html',context=context_dict)
+
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
     if not val:
@@ -120,20 +157,6 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
-  
-    
-# If anyone want to change the page after uploading successfully, modify return redirect('book') 
-@login_required
-def upload_books(request):
-    if request.method == 'POST' :
-        form = BookForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('book')
-    else:
-        form = BookForm()
-        
-    return render(request,'jot/addbook.html',{'form': form})
 
 #def review(request, pk):
     #take a list 
@@ -153,4 +176,3 @@ def pdf_view(request, pk):
     filepath = os.path.join(settings.MEDIA_ROOT, filename)
 
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
-

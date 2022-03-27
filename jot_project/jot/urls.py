@@ -16,5 +16,7 @@ urlpatterns = [
     path('searchresults/', views.searchresults, name='searchresults'),
     path('addbook/',views.upload_books,name = 'addbook'),
     path('book/pdf/<int:pk>', views.pdf_view, name='pdf'),
+    path('category/<slug:category_slug>', views.category, name='category'),
+    path('userpage/<slug:user_slug>', views.userpage, name='userpage'),
     #path('book/<int:pk>/review', views.review, name='review'),
 ]
