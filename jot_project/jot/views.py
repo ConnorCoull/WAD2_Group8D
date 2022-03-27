@@ -1,28 +1,40 @@
+from math import floor
+import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+from .GoogleBookSearchAPI import getRatings
 
 #call the upload function in Forms
-from .forms import BookForm
+from .forms import BookForm, UserProfileForm
 from django.conf import settings
 
 from .models import Book
+from .models import Users
+from django.contrib.auth.decorators import login_required
 
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
 def index(request):
-    model = Book
-    keyword = request.GET.get('q')
     context_dict = {}
-    visitor_cookie_handler(request)
+    top_books_list = Book.objects.order_by('-book_views')[:10]
+    context_dict['top_books_list'] = top_books_list
+
+    keyword = request.GET.get('query-input')
+    chosen_category = request.GET.get('chosen-category')
+
     if keyword:
-       books_list = Book.objects.filter(book_title__icontains = keyword)
-       context_dict['books_list'] = books_list
+        if chosen_category == "user":
+            context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
+            
+        elif chosen_category == "book":
+            context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
+
+    visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/index.html', context=context_dict)
-
 
 def about(request):
     context_dict = {}
@@ -45,25 +57,37 @@ def categories(request):
     return render(request, 'jot/categories.html', context=context_dict)
 
 def surpriseme(request):
-    #this will take an argument of a page fetched at random
+    book_ids = [book.bookID for book in Book.objects.all()]
+    random_book = random.randrange(0, max(book_ids))
+    return book(request, random_book.bookID)
 
-    #potentually get rid of all of this and in the return return a page.html response??
-    context_dict = {}
+def book(request, pk):
+    #may need to take a random book
+
+    context_dict = {
+        'star1':'white-star',
+        'star2':'white-star',
+        'star3':'white-star',
+        'star4':'white-star',
+        'star5':'white-star',}
+
+    try:
+        book = Book.objects.get(bookID=pk)
+        GoogleBooksApiFeedback = getRatings(book.book_title) #grab this from the book data/ api
+
+        rating = GoogleBooksApiFeedback[0]
+        rating = floor(rating+0.5)
+
+        for count in range(rating):
+            context_dict['star'+str(count+1)] = 'yellow-star'
+
+        context_dict['book'] = book
+        context_dict["total_reviews"] = GoogleBooksApiFeedback[1]
+    except Book.DoesNotExist:
+        context_dict['book'] = None
+
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    return render(request, 'jot/surpriseme.html', context=context_dict)
-
-def book(request):
-    #this will take an argument of a page fetched at random
-    #fetch book here
-    #star_colours = ['#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4']
-    #for counter in range(book.rating **assuming rating is rounded to nearest .5** ):
-    #   star_colours[book.rating/2] = #yellow
-    #context_dict['star_colours'] = star_colours
-    context_dict = {}
-    visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
-    context_dict['test_star_colour'] = ['#ffd800', '#ffd800', '#ffd800', '#ffd800', '#ffd800', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4', '#f4f4f4']
     return render(request, 'jot/book.html', context=context_dict)
 
 def searchresults(request):
@@ -91,16 +115,25 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
-#i
-#required login?
+  
+    
+# If anyone want to change the page after uploading successfully, modify return redirect('book') 
+@login_required
 def upload_books(request):
     if request.method == 'POST' :
         form = BookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('book')
     else:
         form = BookForm()
         
     return render(request,'jot/addbook.html',{'form': form})
 
+#Matthew: here we alow users to edit thier bio, user type and proficle pic, email adress
+#and usernmae cannot be changed, chaging password is seperate 
+#def edit_profile(request):
+#    if request.method == 'POST' :
+#        profile_form = UserProfileForm(request.POST)
+#        if profile_form.is_valid():
+#            profile_form.save()

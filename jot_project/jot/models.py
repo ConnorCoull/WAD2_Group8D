@@ -16,7 +16,6 @@ from django.template.defaultfilters import slugify
 
 # Note the user_type is a boolean value that stores whether the user is a reader or a writer. 
 # The user_type is simply just for display purposes on the users profile and has no other effect.
-#              
 
 
 
@@ -122,7 +121,7 @@ class Review(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_picture = models.ImageField(upload_to=file_path)  
-    bio = models.TextField()
+    bio = models.TextField(blank=True, default="hello, i'm on JOT!")
     user_picture_file=str(user_picture)+'pdf'
 
     def __str__(self):
@@ -132,6 +131,12 @@ class UserProfile(models.Model):
         verbose_name = 'UserProfile'
         verbose_name_plural = 'UserProfiles'
 
+#Below is not mines (Marks)
 
+#This function just updates the related User Model when the UserProfile gets updated
+#@receiver(post_save, sender=User)
+#def create_user_profile(sender, instance, created, **kwargs):
+#    if created:
+#        UserProfile.objects.create(user=instance)
 
 
