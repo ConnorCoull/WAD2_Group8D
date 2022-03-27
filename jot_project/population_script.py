@@ -29,7 +29,11 @@ def populate():
         {'username': 'DrPepperLover', 'password':'password', 'email' : 'DrPepperLover@gmail.com'},
         {'username': 'pomeranianWriter', 'password': 'password','email' : 'pomeranian86345writer@gmail.com'},   
         {'username': 'Geezer5623', 'password': 'password','email' : 'geezerinnit@gmail.com'} ,
-        {'username': 'readTheMostBooksEver', 'password': 'password','email' : 'bookEnthusiast@gmail.com'},            
+        {'username': 'readTheMostBooksEver', 'password': 'password','email' : 'bookEnthusiast@gmail.com'}, 
+        {'username': 'crewEarly', 'password':'password', 'email': 'crewmate@gmail.com'},
+        {'username': 'rastaaaangel94837', 'password':'password', 'email': 'rasta@gmail.com'},
+        {'username': 'RachelJohnson', 'password':'password', 'email': 'RachelJohnson838737@gmail.com'},
+        {'username': 'winstonSmith', 'password':'password', 'email': 'Winston46356Smith@gmail.com'},
         ]
 
     test_books = [
@@ -49,13 +53,36 @@ def populate():
 
         {'book_title':'The Myth Of Sisyphus', 'author':'Albert Camus', 'book_description':'''According to the Greek myth, Sisyphus is condemned to roll 
         a rock up to the top of a mountain, only to have the rock roll back down to the bottom every time he reaches the top. The gods were wise, 
-        Camus suggests, in perceiving that an eternity of futile labor is a hideous punishment.''', 'uploaded_by':'Hamaguchi',
+        Camus suggests, in perceiving that an eternity of futile labor is a hideous punishment.''', 'uploaded_by':'crewEarly',
          'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_file_path': 'jot/media', 'book_category': 'Philosophy', 'book_views': 12},
 
-        {'book_title':'Cthulhu loses his Ipad', 'author':'pomeranianWriter', 'book_description':'''Cthulhu - dreaded, colossal beast of the sea, takes a break from terrorising lone fishermen
-         to look for his ipad, which he swears he put somewhere near the indian ocean.''', 'uploaded_by':'pomeranianWriter',
-         'book_date_published':'2009-01-01', 'book_average_rating' : 2, 'book_file_path': 'jot/media', 'book_category': 'Fiction', 'book_views': 82},
+        {'book_title':'Cthulhu loses his Ipad', 'author':'pomeranianWriter', 'book_description':'''Cthulhu - dreaded, 
+        colossal beast of the sea, takes a break from terrorising lone fishermeno look for his ipad, which he swears he put 
+        somewhere near the indian ocean.''', 'uploaded_by':'pomeranianWriter','book_date_published':'2009-01-01', 
+        'book_average_rating' : 2, 'book_file_path': 'jot/media', 'book_category': 'Fiction', 'book_views': 82},
 
+        {'book_title': 'No Mean City', 'author':'Kingsley Long & Alexander McArthur', 'book_description' : 
+        '''It is an account of life in the Gorbals, a run-down slum district of Glasgow with the hard men and the razor gangs.''',
+        'uploaded_by': 'RachelJohnson','book_date_published' : '1935-01-01', 'book_average_rating' : 4,'book_file_path' : 'jot/media', 
+        'book_category':'Fiction','book_views' : 9 },
+
+        {'book_title': '''Jamie's 30-Minute Meals''', 'author':'Jamie Oliver', 'book_description' : '''Recipes you can make in 30 minutes!''',
+        'uploaded_by': 'winstonSmith','book_date_published' : '2010-08-29', 'book_average_rating' : 3,'book_file_path' : 'jot/media', 
+        'book_category':'Lifestyle','book_views' : 24 },
+
+        {'book_title': '''Harry Potter and the Philosopher's Stone''', 'author':'J. K. Rowling', 'book_description' : 
+        '''The first book in the critically acclaimed Harry Potter book series!''',
+        'uploaded_by': 'DrPepperLover','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
+        'book_category':'Kids','book_views' : 1683 },
+
+        {'book_title': 'In Defence of Witches', 'author':'Mona Chollet', 'book_description' : ''''What remains of the witch hunts? A stubborn misogyny,
+         which still tints the way our societies look at single women, childless women, aging women, or quite simply, free women . . .''',
+        'uploaded_by': 'coolAsACucumber','book_date_published' : '2022-06-01', 'book_average_rating' : 3,'book_file_path' : 'jot/media', 
+        'book_category':'Non-fiction','book_views' : 396 },
+
+        {'book_title': 'Das Kapital', 'author':'Karl Marx', 'book_description' : '''Foundational theoretical text in politics''',
+        'uploaded_by': 'winstonSmith','book_date_published' : '1867-01-01', 'book_average_rating' : 3,'book_file_path' : 'jot/media', 
+        'book_category':'Political','book_views' : 805 },
         ]   
 
 
@@ -75,6 +102,26 @@ def populate():
 
         {'review_book': 'The Myth Of Sisyphus', 'reviewer':'OnionGuy34672', 'review_rating' : 2
         , 'review_date_written': '2022-12-22', 'review_content': 'Depressing, this guy needs to brighten up.'},
+
+        {'review_book': 'Cthulhu loses his Ipad', 'reviewer':'readTheMostBooksEver', 'review_rating' : 1
+        , 'review_date_written': '2022-12-22', 'review_content': '''This story is a disgrace to the amazing beast cthulhu, in what world would 
+        Cthulhu ever own an Ipad? Never mind lose it!! As lovecraft's biggest fan EVER I think this book is just plain dumb.'''},
+        
+        {'review_book': '''Jamie's 30-Minute Meals''', 'reviewer':'crewEarly', 'review_rating' : 5
+        , 'review_date_written': '2021-12-21', 'review_content': 'My family love the meals I make with this. Thank you Jamie!'},
+
+        {'review_book': '''Harry Potter and the Philosopher's Stone''', 'reviewer':'coolAsACucumber', 'review_rating' : 3
+        , 'review_date_written': '2021-12-21', 'review_content': 'My youngest read this and loved it!'},
+
+        {'review_book': 'No Mean City', 'reviewer':'Geezer5623', 'review_rating' : 4
+        , 'review_date_written': '2021-12-21', 'review_content': '''As a Glaswegian myself I found this book a great read!
+        A must read if you're from Glasgow.'''},
+
+        {'review_book': 'Das Kapital', 'reviewer':'rastaaaangel94837', 'review_rating' : 3
+        , 'review_date_written': '2021-12-21', 'review_content': 'An eye-opening read, however verbose'},
+
+
+
         ]
 
 
@@ -142,7 +189,7 @@ def add_book(cat, book_title, author, book_description, uploaded_by, book_date_p
 
 def add_review(review_book, reviewer, review_rating, review_date_written, review_content):
     b = Book.objects.get_or_create(book_title=review_book)[0]
-    r = Review.objects.get_or_create(review_book=b)[0]
+    r = Review.objects.create(review_book=b)
     u = User.objects.get_or_create(username=reviewer)[0]
     r.reviewer = u
     r.review_rating=review_rating
