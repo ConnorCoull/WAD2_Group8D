@@ -1,5 +1,4 @@
 from math import floor
-from pyexpat import model
 import random
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -88,7 +87,6 @@ def searchresults(request):
     if keyword:
         if chosen_category == "user":
             context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
-            print(context_dict['users_list'])
             
         elif chosen_category == "book":
             context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
