@@ -7,10 +7,6 @@
 <div id="search-bar">
   <form class="search-form" action="{% url 'jot:searchresults' %}" method="get">
     <button class="submit-button" type="submit">Search</button>
-    <select id="choose-list" name="chosen-category">
-      <option value="user">user</option>
-      <option value="book">book</option>
-    </select>
     <input class="search-bar" name="query-input" type="text" placeholder="Search...">
   </form>
 </div>

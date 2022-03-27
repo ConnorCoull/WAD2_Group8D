@@ -85,11 +85,10 @@ def searchresults(request):
     chosen_category = request.GET.get('chosen-category')
 
     if keyword:
-        if chosen_category == "user":
+       
             context_dict['users_list'] = Users.objects.filter(username__icontains = keyword)
-            
-        elif chosen_category == "book":
             context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
+
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     context_dict['query'] = keyword
