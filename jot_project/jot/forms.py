@@ -15,7 +15,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('bio', 'user_picture','user_type',)
+        fields = ('bio', 'user_picture',)
 
 #Do i need to add the book being reviewed and the user reviewing it as a hidden field?
 class ReviewFrom(forms.ModelForm):

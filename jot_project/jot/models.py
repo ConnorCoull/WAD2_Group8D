@@ -38,9 +38,7 @@ class Category(models.Model):
 # Renames the files
 # The return is formatted as such in case we want to ad dmore to the file path
 
-#class NameFile(object):
-    #def __init__(self, path):
-       # self.path = path
+
 def file_path(instance, filename):
     filename_no_ext, ext = os.path.splittext(filename)
     if isinstance(instance, Book):
