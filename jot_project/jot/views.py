@@ -1,17 +1,19 @@
+from fileinput import filename
 from math import floor
 import random
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, FileResponse
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from datetime import datetime
+from django.urls import reverse
 from .GoogleBookSearchAPI import getRatings
+import os
 
 #call the upload function in Forms
 from .forms import BookForm, UserProfileForm
 from django.conf import settings
 
 from .models import Book
-from .models import Users
 from django.contrib.auth.decorators import login_required
 
 # Imaginary function to handle an uploaded file.
@@ -47,8 +49,9 @@ def categories(request):
 
 def surpriseme(request):
     book_ids = [book.bookID for book in Book.objects.all()]
-    random_book = random.randrange(0, max(book_ids))
-    return book(request, random_book.bookID)
+    random_book = random.randrange(7, max(book_ids))
+    print(random_book)
+    return redirect(f'/jot/book/{random_book}')
 
 def book(request, pk):
     #may need to take a random book
@@ -58,7 +61,8 @@ def book(request, pk):
         'star2':'white-star',
         'star3':'white-star',
         'star4':'white-star',
-        'star5':'white-star',}
+        'star5':'white-star',
+        }
 
     try:
         book = Book.objects.get(bookID=pk)
@@ -72,6 +76,7 @@ def book(request, pk):
 
         context_dict['book'] = book
         context_dict["total_reviews"] = GoogleBooksApiFeedback[1]
+        context_dict['book_location'] = str(book.pdf_upload)
     except Book.DoesNotExist:
         context_dict['book'] = None
 
@@ -128,6 +133,9 @@ def upload_books(request):
         
     return render(request,'jot/addbook.html',{'form': form})
 
+#def review(request, pk):
+    #take a list 
+
 #Matthew: here we alow users to edit thier bio, user type and proficle pic, email adress
 #and usernmae cannot be changed, chaging password is seperate 
 #def edit_profile(request):
@@ -135,3 +143,12 @@ def upload_books(request):
 #        profile_form = UserProfileForm(request.POST)
 #        if profile_form.is_valid():
 #            profile_form.save()
+
+
+def pdf_view(request, pk):
+    book = Book.objects.get(pk=pk)
+    filename = str(book.pdf_upload)
+    filepath = os.path.join(settings.MEDIA_ROOT, filename)
+
+    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+

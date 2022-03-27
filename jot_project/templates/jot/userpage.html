@@ -1,4 +1,10 @@
-{% extends 'jot/base.html' %} {% load static %} {% block title_block %}
-user.username {%endblock %} {% block body_block %}
-
+{% extends 'jot/base.html' %}
+{% load static %}
+{% block title_block %}
+    user.username
+{%endblock %}
+{% block body_block %}
+    <div class="profile-picture"></div>
+    <div class="user-profile-information"></div>
+    <div class="user books"></div>
 {% endblock %}
