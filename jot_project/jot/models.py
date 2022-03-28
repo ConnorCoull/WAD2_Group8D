@@ -42,7 +42,7 @@ class Category(models.Model):
 
 
 def file_path(instance, filename):
-    filename_no_ext, ext = os.path.splittext(filename)
+    filename_no_ext, ext = os.path.splitext(filename)
     if isinstance(instance, Book):
         return 'media/books/{filename}/{filename_ext}'.format(filename=filename_no_ext, filename_ext = ext)
 
@@ -123,7 +123,7 @@ class Review(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_picture = models.ImageField(upload_to=file_path)  
-    bio = models.TextField(blank=True, default="hello, i'm on JOT!")
+    bio = models.CharField(blank=True, default="hello, i'm on JOT!", max_length=250)
     user_picture_file=str(user_picture)+'.pdf'
 
     def save(self, *args, **kwargs):
@@ -148,5 +148,4 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-
 

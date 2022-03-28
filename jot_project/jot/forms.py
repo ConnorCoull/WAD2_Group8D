@@ -1,3 +1,4 @@
+from tokenize import blank_re
 from django import forms 
 from django.contrib.auth.models import User
 from jot.models import UserProfile,Book,Review
@@ -11,16 +12,18 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
     
 class UserProfileForm(forms.ModelForm):
-
+    bio = forms.CharField(max_length=250)
+    user_picture = forms.ImageField()
+    
     class Meta:
-        model = UserProfile
-        fields = ('bio', 'user_picture',)
+        model = User
+        fields = ('username', 'email', 'password')
 
 #Do i need to add the book being reviewed and the user reviewing it as a hidden field?
 class ReviewFrom(forms.ModelForm):
     review_content  = forms.CharField(max_length=250)
     #Maybe radio buttons insted 
-    review_rating = forms.IntegerField()
+    review_rating = forms.IntegerField(min_value=1,max_value=5)
     class Meta:
         model = Review
         fields = ('review_rating','review_content')
@@ -32,5 +35,5 @@ class BookForm(forms.ModelForm):
                   'author',
                   'book_description',
                   'pdf_upload',
-
-                  )
+                  'book_category',
+        )
