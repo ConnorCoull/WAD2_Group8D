@@ -8,7 +8,13 @@
 {% block body_block %}
     {% if user %}
         <div class="image-container" background="{{ user.user_picture }}">
-            <!--<div class="profile-picture"></div>-->
+            <div class="profile-picture">
+                {% if user.profile.image %}
+                    <img src="{{ user.profile.image.url }}">
+                {% else %}
+                    <img src="{% static 'img/defaultpfp.png' %}">
+                {% endif %}
+            </div>
         </div>
         <div class="user-profile-information" background><h3 class="h3-subtitle-block">{{ user.username }}</h3><br /><div id="bio-paragraph"><p class="main-paragraph">{{ user.bio }}</p></div></div>
             <div class="user-books">

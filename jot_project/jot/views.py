@@ -8,11 +8,10 @@ from datetime import datetime
 from django.urls import reverse
 from .GoogleBookSearchAPI import getRatings
 import os
-from .models import Book
-from .models import User
+from .models import Book,User
 
 #call the upload function in Forms
-from .forms import BookForm, UserProfileForm#, ReviewForm
+from .forms import BookForm, UserProfileForm, ReviewForm
 from django.conf import settings
 from .models import Book, Category, Review
 from django.contrib.auth.decorators import login_required

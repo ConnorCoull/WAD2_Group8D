@@ -19,7 +19,7 @@ class UserProfileForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 #Do i need to add the book being reviewed and the user reviewing it as a hidden field?
-class ReviewFrom(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     review_content  = forms.CharField(max_length=250)
     #Maybe radio buttons insted 
     review_rating = forms.IntegerField(min_value=1,max_value=5)
