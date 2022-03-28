@@ -30,6 +30,11 @@ body::-webkit-scrollbar {
   text-justify: distribute-all-lines;
 }
 
+.bar a {
+  color: #f4f4f4;
+  text-decoration: none;
+}
+
 .vertical-bar {
   background-color: #5c6274;
   color: #5c6274;
@@ -542,7 +547,6 @@ ul.navbar li a {
   color: #f4f4f4;
 }
 
-<<<<<<< Updated upstream
 .user-profile-information .h3-subtitle-block{
   color: #f4f4f4;
   float: left;
@@ -586,4 +590,16 @@ ul.navbar li a {
   width: 100%;
   height: 60%;
   float: right;
+}
+
+.block-body{
+  background-color: #5c6274;
+  position: absolute;
+  width: 40%;
+  padding-left: 10%;
+  padding-right: 10%;
+  height: auto;
+  left: 20%;
+  top: 40%;
+
 }
