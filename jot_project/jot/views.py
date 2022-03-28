@@ -15,6 +15,7 @@ from .models import User
 from .forms import BookForm, UserProfileForm
 from django.conf import settings
 
+
 from .models import Book, Category, Review
 from django.contrib.auth.decorators import login_required
 

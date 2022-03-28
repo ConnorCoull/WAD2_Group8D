@@ -110,6 +110,8 @@ class Review(models.Model):
     review_date_written = models.DateField(auto_now=False, auto_now_add=True)
     review_content = models.CharField(max_length=1024)
 
+    
+
     def __str__(self):
         return self.review_content
 
@@ -122,7 +124,13 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_picture = models.ImageField(upload_to=file_path)  
     bio = models.TextField(blank=True, default="hello, i'm on JOT!")
-    user_picture_file=str(user_picture)+'pdf'
+    user_picture_file=str(user_picture)+'.pdf'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(UserProfile, self).save(*args, **kwargs)
+
+  
 
     def __str__(self):
         return self.user.username
@@ -131,7 +139,9 @@ class UserProfile(models.Model):
         verbose_name = 'UserProfile'
         verbose_name_plural = 'UserProfiles'
 
-#Below is not mines (Marks)
+
+#Below is not Marks
+
 
 #This function just updates the related User Model when the UserProfile gets updated
 @receiver(post_save, sender=User)
