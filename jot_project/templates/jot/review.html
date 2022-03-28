@@ -6,6 +6,11 @@
 {% block body_block %}
     <!--main should become a scroll div but if now make one here -->
     <h1 class="h1-title-block">book.name reviews:</h1><br />
+    {% if user.is_authenticated %}
+    <h3 class="h3-subtitle-block"><a href="{% url 'jot:addreview' book.bookID %}">Add a Review for this book</a></h3>
+    {% else %}
+        <p class="main-paragraph">sign in to leave a review</p>
+    {% endif %}
     {% if reviews %}
         {% for review in reviews %}
             <li><h3 class="h3-subtitle-block">review.username - review.rating/5 - review.date</h3>
@@ -13,6 +18,6 @@
                 <p class="main-paragraph">review.content</li>
         {% endfor %}
     {% else %}
-        <strong>This book has no reviews! add one(link)?</strong>
+        <h3 class="h3-subtitle-block">This book has no jot reviews!</h3>
     {% endif %}
 {% endblock %}
