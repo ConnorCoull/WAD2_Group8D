@@ -5,4 +5,4 @@ Pillow==9.0.1
 sqlparse==0.4.2
 tzdata==2021.5
 wincertstore==0.2
-django-registration-redux==2.2
+django-registration-redux==2.10
