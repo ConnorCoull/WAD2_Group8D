@@ -66,12 +66,12 @@ def userpage(request, username):
                 form.save()
         else:
             form = UserProfileForm()
-        context_dict['form'] = form        
+        
     except User.DoesNotExist:
         context_dict['user'] = None
 
     try:
-        context_dict['user_books'] = Book.objects.filter(uploaded_by=user)
+        context_dict['user_books'] = Book.objects.filter(author=user)
     except Book.DoesNotExist:
         context_dict['user_books'] = None
     
@@ -170,7 +170,7 @@ def upload_books(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     if request.method == 'POST' :
-        form = BookForm(request.POST)
+        form = BookForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             return render(request,'jot/index.html')
