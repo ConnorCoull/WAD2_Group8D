@@ -1,5 +1,7 @@
+from cgi import print_form
 from fileinput import filename
 from math import floor
+from pprint import pformat
 import random
 from django.http import HttpResponseRedirect, FileResponse
 from django.shortcuts import render, redirect
@@ -57,6 +59,14 @@ def userpage(request, username):
     try:
         user = User.objects.get(username=username)
         context_dict['user'] = user
+        if request.method == 'POST':
+            form = UserProfileForm(request.POST,request.FILES)
+
+            if form.is_valid():
+                form.save()
+        else:
+            form = UserProfileForm()
+        context_dict['form'] = form        
     except User.DoesNotExist:
         context_dict['user'] = None
 
@@ -160,7 +170,7 @@ def upload_books(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     if request.method == 'POST' :
-        form = BookForm(request.POST,request.FILES)
+        form = BookForm(request.POST)
         if form.is_valid():
             form.save()
             return render(request,'jot/index.html')
