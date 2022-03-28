@@ -10,7 +10,7 @@
 {% block body_block %}
   {% if book %}
     <h1 class="h1-title-block">{{ book.book_title }}</h1>
-    <h3 class="h3-subtitle-block">{{ book.book_category }} by <a href="{% url 'jot:userpage' book.author %}">{{ book.author }}</a></h3>
+    <h3 class="h3-subtitle-block">{{ book.book_category }} by <a href="{% url 'jot:userpage' book.uploaded_by %}">{{ book.uploaded_by }}</a></h3>
     <p class="main-paragraph">{{ book.book_description }}</p>
     <div class="book-div">
       <div class="book-link">
@@ -25,6 +25,7 @@
       <i class="fas fa-star fa-2x {{ star4 }}"></i>
       <i class="fas fa-star fa-2x {{ star5 }}"></i>
       ({{ total_reviews }})
+      <a href="{% url 'jot:review' book.bookID %}">See the Reviews</a>
     </div>
 
     <div class="accordion">

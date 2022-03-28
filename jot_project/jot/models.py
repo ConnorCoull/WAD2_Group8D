@@ -51,7 +51,7 @@ class Book(models.Model):
     pdf_location = (str(book_title)+'.pdf')
     author = models.CharField(max_length=64)
     book_description = models.CharField(max_length=1024)
-    pdf_upload = models.FileField(upload_to = 'books')
+    pdf_upload = models.FileField(upload_to = 'books/')
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     book_average_rating = models.PositiveIntegerField(

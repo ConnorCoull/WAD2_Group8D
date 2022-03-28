@@ -5,17 +5,17 @@
 {%endblock %}
 {% block body_block %}
     <!--main should become a scroll div but if now make one here -->
-    <h1 class="h1-title-block">book.name reviews:</h1><br />
+    <h1 class="h1-title-block">{{ book.book_title }} reviews:</h1><br />
     {% if user.is_authenticated %}
-    <h3 class="h3-subtitle-block"><a href="{% url 'jot:addreview' book.bookID %}">Add a Review for this book</a></h3>
+        <h3 class="h3-subtitle-block"><a href="{% url 'jot:addreview' book.bookID %}">Add a Review for this book</a></h3>
     {% else %}
         <p class="main-paragraph">sign in to leave a review</p>
     {% endif %}
     {% if reviews %}
         {% for review in reviews %}
-            <li><h3 class="h3-subtitle-block">review.username - review.rating/5 - review.date</h3>
+            <li><h3 class="h3-subtitle-block">{{ review.reviewer }}- {{ review.review_rating }}/5 - {{ review.review_data_written }}</h3>
                 <br />
-                <p class="main-paragraph">review.content</li>
+                <p class="main-paragraph">{{ review.content }}</li>
         {% endfor %}
     {% else %}
         <h3 class="h3-subtitle-block">This book has no jot reviews!</h3>
