@@ -12,10 +12,10 @@
 
 {% block body_block %}
   {% if books %}
-    <h1 class="h1-title-block">{{ category_name }}</h1>
-    <ul>
+    <h1 class="h1-title-block">Books under {{ category.category_name }}</h1><br />
+    <ul class="category-list">
     {% for book in books %}
-    <li><a href="{% url 'jot:categories' category.category_name %}"><h3 class="h3-subtitle-block">category.category_name</h3></a></li>
+    <li><a href="{% url 'jot:book' book.bookID %}"><h3 class="h3-subtitle-block">{{ book.book_title }}</h3></a></li>
     {% endfor %}
     </ul>
   {% else %}

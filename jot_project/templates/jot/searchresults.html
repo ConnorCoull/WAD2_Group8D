@@ -28,7 +28,7 @@ Query
   <ul class="books-list">
     {% for user in users_list %}
     <li>
-      <a href="#">{{ user }}</a>
+      <a href="{% url 'jot:userpage' user.username %}">{{ user.username }}</a>
     </li><br />
     {% endfor %}
     {% else %}

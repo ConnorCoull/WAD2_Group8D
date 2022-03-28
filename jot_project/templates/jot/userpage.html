@@ -7,23 +7,21 @@
 
 {% block body_block %}
     {% if user %}
-        <div class="image-container">
+        <div class="image-container" background="{{ user.user_picture }}">
             <!--<div class="profile-picture"></div>-->
         </div>
-        <div class="user-profile-information"><h3 class="h3-subtitle-block">username</h3><br /><p class="main-paragraph">bio</p></div>
-        <div class="user books">
-            Need to get the users 3 highest rated books then for book in books then add a special + at the end
+        <div class="user-profile-information" background><h3 class="h3-subtitle-block">username</h3><br /><div id="bio-paragraph"><p class="main-paragraph">bio</p></div></div>
+            <div class="user-books">
             {% if user_books %}
-                <ul>
+                <ul class="user-books-list">
                     {% for book in user_books %}
-                        <li>link to the book</li>
+                        <li class="individual-book-div"><a href="{% url 'jot:book' book.bookID %}">{{ book.book_title }}</a></li>
                     {% endfor %}
-                    <li id="see-more-books"> the extra link </li>
                 </ul>
             {% else %}
                 <h3 class="h3-subtitle-block">This user has no books</h3>
             {% endif %}
-
+            </div>
         </div>
     {% else %}
         <h3 class="h3-subtitle-block">This user appears to not exist.... mysterious...</h3>

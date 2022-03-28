@@ -129,7 +129,7 @@ body::-webkit-scrollbar {
 }
 
 .books-list {
-  padding-left: 0;
+  padding: 0;
   color: #f4f4f4;
   position: absolute;
   width: 100%;
@@ -163,6 +163,11 @@ body::-webkit-scrollbar {
   float: right;
   font-size: 20px;
   font-size: 2vw;
+}
+
+#login-block a{
+  color: #f4f4f4;
+  text-decoration: none;
 }
 
 #search-bar-button {
@@ -388,8 +393,11 @@ ul.navbar li a {
 .books-list li a{
   color: #f4f4f4;
   text-decoration: none;
-  padding-left: 15%;
+  text-align: center;
+  marker: none;
+  padding: 15%;
 }
+
 
 .books-results {
   left: 5%;
@@ -442,15 +450,19 @@ ul.navbar li a {
 
 .top-book-link{
   list-style-type: none;
+  padding-left: 0;
+  text-align: center;
 }
 
 .book-link a{
   list-style-type: none;
   color: #f4f4f4;
+  text-align: center;
 }
 
 .top-book-link a:link{
   color: #f4f4f4;
+  padding: 0;
 }
 
 .top-book-link a:visited{
@@ -478,10 +490,12 @@ ul.navbar li a {
 }
 
 .image-container{
-  background-color: #5c6274;
+  background-color: #002b59;
   position: absolute;
+  top: 7%;
+  left: 5%;
   width: 25%;
-  padding-top: 100%;
+  height: 35%;
 }
 
 .user-books{
@@ -503,6 +517,72 @@ ul.navbar li a {
   padding-left: 0;
 }
 
-#see-more-books{
+.category-list{
+  list-style-type: none;
+}
 
+.category-list a{
+  list-style-type: none;
+  padding: 0;
+}
+
+.users-books{
+  display: inline;
+  
+}
+
+.user-profile-information{
+  position: absolute;
+  height: 35%;
+  width: 60%;
+  padding-left: 5%;
+  top: 7%;
+  left: 30%;
+  background-color: #5c6274;
+  color: #f4f4f4;
+}
+
+.user-profile-information .h3-subtitle-block{
+  color: #f4f4f4;
+  float: left;
+}
+
+.user-profile-information .main-paragraph{
+  float: left;
+}
+.user-books {
+  position: absolute;
+  display: inline;
+  height: 35%;
+  width: 90%;
+  left: 5%;
+  top: 50%;
+  background-color: #f4f4f4;
+}
+
+.user-books-list{
+  text-align: center;
+}
+
+.user-book-list li{
+  color: #5c6274;
+}
+
+.individual-book-div{
+  color: #5c6274;
+  text-decoration: none;
+  font-size: 2vw;
+}
+
+.individual-book-div a{
+  color: #5c6274;
+  text-decoration: none;
+  font-size: 2vw;
+}
+
+#bio-paragraph{
+  top: 40%;
+  width: 100%;
+  height: 60%;
+  float: right;
 }
