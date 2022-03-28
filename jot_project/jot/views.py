@@ -14,8 +14,6 @@ from .models import User
 #call the upload function in Forms
 from .forms import BookForm, UserProfileForm#, ReviewForm
 from django.conf import settings
-
-
 from .models import Book, Category, Review
 from django.contrib.auth.decorators import login_required
 
@@ -157,7 +155,6 @@ def review(request, pk):
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/review.html', context=context_dict)
 
-
 @login_required
 def upload_books(request):
     context_dict = {}
@@ -202,7 +199,6 @@ def addreview(request, pk):
     context_dict = {'form': form, 'book': book}
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/about.html', context=context_dict) #replace me
-
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
