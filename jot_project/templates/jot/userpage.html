@@ -1,5 +1,5 @@
 {% extends 'jot/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block title_block %}
     {{ user.username }}
@@ -8,7 +8,13 @@
 {% block body_block %}
     {% if user %}
         <div class="image-container" background="{{ user.user_picture }}">
-            <!--<div class="profile-picture"></div>-->
+            <div class="profile-picture">
+                {% if user.profile.image %}
+                    <img src="{{ user.profile.image.url }}">
+                {% else %}
+                    <img src="{% static 'images/defualtpfp.png' %}">
+                {% endif %}
+            </div>
         </div>
         <div class="user-profile-information" background><h3 class="h3-subtitle-block">{{ user.username }}</h3><br /><div id="bio-paragraph"><p class="main-paragraph">{{ user.bio }}</p></div></div>
             <div class="user-books">
@@ -21,9 +27,11 @@
             {% else %}
                 <h3 class="h3-subtitle-block">This user has no books</h3>
             {% endif %}
+            <h3><a href="{% url 'jot:addbook' %}">Add A book?</a></h3>
             </div>
 
         </div>
+    </br>
     {% else %}
         <h3 class="h3-subtitle-block">This user appears to not exist.... mysterious...</h3>
     {% endif %}

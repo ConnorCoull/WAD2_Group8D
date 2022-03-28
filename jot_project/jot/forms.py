@@ -11,15 +11,14 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
     
 class UserProfileForm(forms.ModelForm):
-    bio = forms.CharField(max_length=250)
     user_picture = forms.ImageField()
     
     class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
+        model = UserProfile
+        exclude = ('user','bio','user_picture_file')
 
 #Do i need to add the book being reviewed and the user reviewing it as a hidden field?
-class ReviewFrom(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     review_content  = forms.CharField(max_length=250)
     #Maybe radio buttons insted 
     review_rating = forms.IntegerField(min_value=1,max_value=5)

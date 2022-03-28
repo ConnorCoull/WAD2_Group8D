@@ -1,5 +1,7 @@
+from cgi import print_form
 from fileinput import filename
 from math import floor
+from pprint import pformat
 import random
 from django.http import HttpResponseRedirect, FileResponse
 from django.shortcuts import render, redirect
@@ -8,11 +10,10 @@ from datetime import datetime
 from django.urls import reverse
 from .GoogleBookSearchAPI import getRatings
 import os
-from .models import Book
-from .models import User
+from .models import Book,User
 
 #call the upload function in Forms
-from .forms import BookForm, UserProfileForm#, ReviewForm
+from .forms import BookForm, UserProfileForm, ReviewForm
 from django.conf import settings
 from .models import Book, Category, Review
 from django.contrib.auth.decorators import login_required
@@ -58,11 +59,19 @@ def userpage(request, username):
     try:
         user = User.objects.get(username=username)
         context_dict['user'] = user
+        if request.method == 'POST':
+            form = UserProfileForm(request.POST,request.FILES)
+
+            if form.is_valid():
+                form.save()
+        else:
+            form = UserProfileForm()
+        
     except User.DoesNotExist:
         context_dict['user'] = None
 
     try:
-        context_dict['user_books'] = Book.objects.filter(uploaded_by=user)
+        context_dict['user_books'] = Book.objects.filter(author=user)
     except Book.DoesNotExist:
         context_dict['user_books'] = None
     
