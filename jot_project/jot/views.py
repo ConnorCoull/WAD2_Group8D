@@ -181,8 +181,8 @@ def visitor_cookie_handler(request):
 
 #Matthew: here we alow users to edit thier bio, user type and proficle pic, email adress
 #and usernmae cannot be changed, chaging password is seperate 
-#def edit_profile(request):
-#    if request.method == 'POST' :
-#        profile_form = UserProfileForm(request.POST)
-#        if profile_form.is_valid():
-#            profile_form.save()
+def edit_profile(request):
+    if request.method == 'POST' :
+        profile_form = UserProfileForm(request.POST)
+        if profile_form.is_valid():
+            profile_form.save()

@@ -3,6 +3,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 import os
 from django.template.defaultfilters import slugify
+ 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Models.py
 #                       
@@ -131,9 +134,9 @@ class UserProfile(models.Model):
 #Below is not mines (Marks)
 
 #This function just updates the related User Model when the UserProfile gets updated
-#@receiver(post_save, sender=User)
-#def create_user_profile(sender, instance, created, **kwargs):
-#    if created:
-#        UserProfile.objects.create(user=instance)
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
 
 

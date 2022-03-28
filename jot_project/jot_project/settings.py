@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jot',
-    #'registration'
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -108,11 +108,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 #Registartion Package varibles, make sure you have Django Registration Redux 
-#REGISTRATION_OPEN = True
-#REGISTRATION_AUTO_LOGIN = True
-#LOGIN_REDIRECT_URL = 'jot:index'
-#LOGIN_URL = 'auth_login'
-
+REGISTRATION_OPEN = True
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = 'jot:index'
+LOGIN_URL = 'auth_login'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

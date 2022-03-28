@@ -25,5 +25,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('jot/', include('jot.urls')),
     #user_auth path,
-    #path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_DIR, document_root=settings.MEDIA_ROOT)
