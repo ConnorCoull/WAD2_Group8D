@@ -39,49 +39,49 @@ def populate():
     test_books = [
         {'book_title': 'The Adventures of Bill and Dandy', 'author':'OnionGuy34672', 'book_description' : 'A book I wrote about 2 guys, bill and dandy', 
         'pdf_upload': 'The_Adventures_Of_Bill_&_Dandy.pdf','uploaded_by': 'OnionGuy34672' ,'book_date_published' : '2022-12-03', 'book_average_rating' : 1.2, 
-        'book_file_path' : 'jot/media', 'book_category':'Fiction', 'book_views' : 5,
+        'book_file_path' : 'media/books', 'book_category':'Fiction', 'book_views' : 5,
         },
     
         {'book_title': 'Inferno', 'author':'Dante_Alighieri', 'book_description' : '''The first part of Dante's poem Divine comedy''', 'pdf_upload': 'Inferno.pdf',
-        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,
         'book_category':'Historical','book_views' : 81 },
         
         #The third book below was added for one of Tianhao's unit tests
         {'book_title': 'Inferno2', 'author':'Dante_Alighieri', 'book_description' : '''The first part of Dante's poem Divine comedy''', 'pdf_upload': 'Inferno2.pdf',
-        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'coolAsACucumber','book_date_published' : '1472-01-01', 'book_average_rating' : 5,
         'book_category':'Historical','book_views' : 81 },
 
         {'book_title':'The Myth Of Sisyphus', 'author':'Albert_Camus', 'book_description':'''According to the Greek myth, Sisyphus is condemned to roll 
         a rock up to the top of a mountain, only to have the rock roll back down to the bottom every time he reaches the top. The gods were wise, 
         Camus suggests, in perceiving that an eternity of futile labor is a hideous punishment.''', 'pdf_upload': 'The_Myth_Of_Sisyphus.pdf', 'uploaded_by':'crewEarly',
-         'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_file_path': 'jot/media', 'book_category': 'Philosophy', 'book_views': 12},
+         'book_date_published':'1945-01-01', 'book_average_rating' : 4, 'book_category': 'Philosophy', 'book_views': 12},
 
         {'book_title':'Cthulhu loses his Ipad', 'author':'pomeranianWriter', 'book_description':'''Cthulhu - dreaded, 
         colossal beast of the sea, takes a break from terrorising lone fishermeno look for his ipad, which he swears he put 
         somewhere near the indian ocean.''', 'pdf_upload': 'Cthulhu_Loses_His_Ipad.pdf', 'uploaded_by':'pomeranianWriter','book_date_published':'2009-01-01', 
-        'book_average_rating' : 2, 'book_file_path': 'jot/media', 'book_category': 'Fiction', 'book_views': 82},
+        'book_average_rating' : 2, 'book_category': 'Fiction', 'book_views': 82},
 
         {'book_title': 'No Mean City', 'author':'Kingsley_Long_& Alexander_McArthur', 'book_description' : 
         '''It is an account of life in the Gorbals, a run-down slum district of Glasgow with the hard men and the razor gangs.''', 'pdf_upload': 'No_Mean_City.pdf',
-        'uploaded_by': 'RachelJohnson','book_date_published' : '1935-01-01', 'book_average_rating' : 4,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'RachelJohnson','book_date_published' : '1935-01-01', 'book_average_rating' : 4,
         'book_category':'Fiction','book_views' : 9 },
 
         {'book_title': '''Jamie's 30-Minute Meals''', 'author':'Jamie_Oliver', 'book_description' : '''Recipes you can make in 30 minutes!''', 'pdf_upload': '''Jamies_30-Minute_Meals.pdf''',
-        'uploaded_by': 'winstonSmith','book_date_published' : '2010-08-29', 'book_average_rating' : 3,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'winstonSmith','book_date_published' : '2010-08-29', 'book_average_rating' : 3, 
         'book_category':'Lifestyle','book_views' : 24 },
 
         {'book_title': '''Harry Potter and the Philosopher's Stone''', 'author':'J._K._Rowling', 'book_description' : 
         '''The first book in the critically acclaimed Harry Potter book series!''', 'pdf_upload': '''Harry_Potter_&_The_Philosophers_Stone.pdf''',
-        'uploaded_by': 'DrPepperLover','book_date_published' : '1472-01-01', 'book_average_rating' : 5,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'DrPepperLover','book_date_published' : '1472-01-01', 'book_average_rating' : 5,
         'book_category':'Kids','book_views' : 1683 },
 
         {'book_title': 'In Defence of Witches', 'author':'Mona_Chollet', 'book_description' : ''''What remains of the witch hunts? A stubborn misogyny,
          which still tints the way our societies look at single women, childless women, aging women, or quite simply, free women . . .''', 'pdf_upload': 'In_Defence_Of_Witches.pdf',
-        'uploaded_by': 'coolAsACucumber','book_date_published' : '2022-06-01', 'book_average_rating' : 3,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'coolAsACucumber','book_date_published' : '2022-06-01', 'book_average_rating' : 3,
         'book_category':'Non-fiction','book_views' : 396 },
 
         {'book_title': 'Das Kapital', 'author':'Karl_Marx', 'book_description' : '''Foundational theoretical text in politics''', 'pdf_upload': 'Das_Kapital.pdf',
-        'uploaded_by': 'winstonSmith','book_date_published' : '1867-01-01', 'book_average_rating' : 3,'book_file_path' : 'jot/media', 
+        'uploaded_by': 'winstonSmith','book_date_published' : '1867-01-01', 'book_average_rating' : 3,
         'book_category':'Political','book_views' : 805 },
         ]   
 
@@ -148,7 +148,7 @@ def populate():
             if key == 'book_category':
                 c = add_category(value)
                 add_book(c, i['book_title'], i['author'], i['book_description'], i['pdf_upload'],i['uploaded_by'], i['book_date_published'], 
-                i['book_average_rating'], i['book_file_path'], i['book_category'], i['book_views'])
+                i['book_average_rating'], i['book_category'], i['book_views'])
         counter +=1
 
     for c in Category.objects.all():
@@ -169,7 +169,7 @@ def add_user(username, password, email):
     u.save()
     return u
 
-def add_book(cat, book_title, author, book_description, pdf_upload, uploaded_by, book_date_published, book_average_rating, book_file_path, book_category, book_views=0):
+def add_book(cat, book_title, author, book_description, pdf_upload, uploaded_by, book_date_published, book_average_rating, book_category, book_views=0):
     b = Book.objects.get_or_create(book_title=book_title)[0]
     c = Category.objects.get_or_create(category_name=cat)[0]
     c2 = Category.objects.get_or_create(category_name=book_category)[0]
@@ -181,7 +181,6 @@ def add_book(cat, book_title, author, book_description, pdf_upload, uploaded_by,
     b.uploaded_by = u 
     b.book_date_published=book_date_published
     b.book_average_rating=book_average_rating
-    b.book_file_path=book_file_path
     b.book_category=c2
     b.book_views=book_views
 
