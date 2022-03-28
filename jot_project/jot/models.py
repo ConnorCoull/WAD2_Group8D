@@ -37,18 +37,6 @@ class Category(models.Model):
         return self.category_name
 
 
-# Renames the files
-# The return is formatted as such in case we want to ad dmore to the file path
-
-
-def file_path(instance, filename):
-    filename_no_ext, ext = os.path.splitext(filename)
-    if isinstance(instance, Book):
-        return 'media/books/{filename}/{filename_ext}'.format(filename=filename_no_ext, filename_ext = ext)
-
-    if isinstance(instance, UserProfile):
-        return 'media/userprofiles/{userid}/{filename}/{filename_ext}'.format(userid=instance.user,filename=filename_no_ext, filename_ext = ext)
-
 
 class Book(models.Model):
  
@@ -63,7 +51,7 @@ class Book(models.Model):
     pdf_location = (str(book_title)+'.pdf')
     author = models.CharField(max_length=64)
     book_description = models.CharField(max_length=1024)
-    pdf_upload = models.FileField(upload_to = file_path)
+    pdf_upload = models.FileField(upload_to = 'books')
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     book_average_rating = models.PositiveIntegerField(
@@ -122,7 +110,7 @@ class Review(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_picture = models.ImageField(upload_to=file_path)  
+    user_picture = models.ImageField(upload_to='userprofiles')  
     bio = models.CharField(blank=True, default="hello, i'm on JOT!", max_length=250)
     user_picture_file=str(user_picture)+'.pdf'
 
@@ -140,7 +128,6 @@ class UserProfile(models.Model):
         verbose_name_plural = 'UserProfiles'
 
 
-#Below is not Marks
 
 
 #This function just updates the related User Model when the UserProfile gets updated
