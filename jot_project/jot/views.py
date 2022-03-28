@@ -12,7 +12,7 @@ from .models import Book
 from .models import User
 
 #call the upload function in Forms
-from .forms import BookForm, UserProfileForm
+from .forms import BookForm, UserProfileForm#, ReviewForm
 from django.conf import settings
 
 
@@ -44,7 +44,7 @@ def contactus(request):
 
 def categories(request):
     context_dict = {}
-    context_dict['categories'] = [category for category in Category.objects.all()]
+    context_dict['categories'] = Category.objects.order_by('category_name')
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/categories.html', context=context_dict)
@@ -55,11 +55,22 @@ def surpriseme(request):
     print(random_book)
     return redirect(f'/jot/book/{random_book}')
 
-def userpage(request, user_slug):
+def userpage(request, username):
     context_dict = {}
+    try:
+        user = User.objects.get(username=username)
+        context_dict['user'] = user
+    except User.DoesNotExist:
+        context_dict['user'] = None
+
+    try:
+        context_dict['user_books'] = Book.objects.filter(author=user)
+    except Book.DoesNotExist:
+        context_dict['user_books'] = None
+    
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    return render(request, 'jot/contactus.html', context=context_dict)#remember to replace contactus!!!!!
+    return render(request, 'jot/userpage.html', context=context_dict)
 
 def book(request, pk):
     context_dict = {
@@ -75,13 +86,19 @@ def book(request, pk):
         GoogleBooksApiFeedback = getRatings(book.book_title)
 
         rating = GoogleBooksApiFeedback[0]
+        total_reviews = GoogleBooksApiFeedback[1]
+
+        if total_reviews == 0:
+            rating = book.book_average_rating
+            total_reviews = book.book_views
+
         rating = floor(rating+0.5)
 
         for count in range(rating):
             context_dict['star'+str(count+1)] = 'yellow-star'
 
         context_dict['book'] = book
-        context_dict["total_reviews"] = GoogleBooksApiFeedback[1]
+        context_dict["total_reviews"] = total_reviews
         context_dict['book_location'] = str(book.pdf_upload)
     except Book.DoesNotExist:
         context_dict['book'] = None
@@ -99,10 +116,8 @@ def pdf_view(request, pk):
 def searchresults(request):
     context_dict = {}
     keyword = request.GET.get('query-input')
-    chosen_category = request.GET.get('chosen-category')
 
     if keyword:
-       
             context_dict['users_list'] = User.objects.filter(username__icontains = keyword)
             context_dict['books_list'] = Book.objects.filter(book_title__icontains = keyword)
 
@@ -119,7 +134,7 @@ def category(request, category_slug):
         books = Book.objects.filter(book_category=category)
         context_dict['books'] = books
         context_dict['category'] = category
-    except category.DoesNotExist:
+    except Category.DoesNotExist:
         context_dict['books'] = None
         context_dict['category'] = None
     visitor_cookie_handler(request)
@@ -131,16 +146,16 @@ def review(request, pk):
     try:
         book = Book.objects.get(bookID=pk)
         context_dict['book'] = book
-    except book.DoesNotExist:
+    except Book.DoesNotExist:
         context_dict['book'] = None
     try:
         reviews = Review.objects.get(review_book=pk)
         context_dict['reviews'] = reviews
-    except review.DoesNotExist:
+    except Review.DoesNotExist:
         context_dict['reviews'] = None
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
-    return render(request, 'jot/review.html', context=context_dict)#remember to replace contactus!!!!!
+    return render(request, 'jot/review.html', context=context_dict)
 
 
 @login_required
@@ -157,6 +172,37 @@ def upload_books(request):
         form = BookForm()
     context_dict['form'] = form        
     return render(request,'jot/addbook.html',context=context_dict)
+
+@login_required
+def addreview(request, pk):
+    context_dict = {}
+
+    try:
+        book = Book.objects.get(pk=pk)
+    except Book.DoesNotExist:
+        book = None
+
+    if book == None:
+        return redirect('/jot/')
+
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+
+        if form.is_valid():
+            if book:
+                review = form.save(commit=False)
+                review.review_book = book
+                review.save()
+
+                return redirect(reverse('jot:book', kwargs={'pk': book.bookID}))
+
+    visitor_cookie_handler(request)
+    context_dict = {'form': form, 'book': book}
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'jot/about.html', context=context_dict) #replace me
+
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)
@@ -180,8 +226,8 @@ def visitor_cookie_handler(request):
 #def review(request, pk):
     #take a list 
 
-#Matthew: here we alow users to edit thier bio, user type and proficle pic, email adress
-#and usernmae cannot be changed, chaging password is seperate 
+#Matthew: here we allow users to edit their bio, user type and profile pic, email address
+#and username cannot be changed, changing password is seperate 
 def edit_profile(request):
     if request.method == 'POST' :
         profile_form = UserProfileForm(request.POST)
