@@ -1,21 +1,24 @@
-<!DOCTYPE html>
+{% extends 'jot/base.html' %}
 
+{% load static %}
 
-<html>
-    <head>
-        <title>
-            JOT
-        </title>
-    </head>
-    <body>
-        <div><h1>JOT<h1> remember the o is an on-click event to load a random page</div>
-        <div>Login stuff here</div>
-        <div>Page links here</div>
-        <div>the sidebar goes here, maybe needs 2 divs</div>
-        <div>remember and use css to make this work on laptop and mobile if possible</div>
-        <!-- above is all header block-->
-        <div>The same as <code>categories.html</code> but this time it is for the pages belonging to that category.</div>
-        <!-- below this is the footer block-->
-        <div>Footer</div>
-    </body>
-</html>
+{% block title_block %}
+    {% if category %}
+        {{ category.category_name }}
+    {% else %}
+        Category not Found
+    {% endif %}
+{%endblock %}
+
+{% block body_block %}
+  {% if books %}
+    <h1 class="h1-title-block">{{ category_name }}</h1>
+    <ul>
+    {% for book in books %}
+    <li><a href="{% url 'jot:categories' category.category_name %}"><h3 class="h3-subtitle-block">category.category_name</h3></a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <h3 class="h3-subtitle-block">There appears to be no sign of book life anywhere....</h3>
+  {% endif %}
+{% endblock %}

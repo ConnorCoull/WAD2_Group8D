@@ -1,15 +1,10 @@
 from django.db import models 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-import uuid
+import os
 from django.template.defaultfilters import slugify
 
 # Models.py
-# We have 4 models here, 
-# 
-# Users - Which stores the information on the user. 
 #                       
 # Category - We sort each book into a category.
 # 
@@ -21,20 +16,6 @@ from django.template.defaultfilters import slugify
 
 # Note the user_type is a boolean value that stores whether the user is a reader or a writer. 
 # The user_type is simply just for display purposes on the users profile and has no other effect.
-#
-# FROM Matthew: shouldnt the UserProfile model below that links to the django user model be used?              
-class Users(models.Model):
-    username = models.CharField(max_length=64, unique=True)
-    user_password = models.CharField(max_length=64)
-    user_type = models.BooleanField(default=False)
-    user_email = models.CharField(max_length=128, unique=True)
-
-    def __str__(self):
-        return self.username
-    
-    class Meta:
-        verbose_name = 'Users'
-        verbose_name_plural = 'Users'
 
 
 class Category(models.Model):
@@ -53,6 +34,19 @@ class Category(models.Model):
         return self.category_name
 
 
+# Renames the files
+# The return is formatted as such in case we want to ad dmore to the file path
+
+
+def file_path(instance, filename):
+    filename_no_ext, ext = os.path.splittext(filename)
+    if isinstance(instance, Book):
+        return 'media/books/{filename}/{filename_ext}'.format(filename=filename_no_ext, filename_ext = ext)
+
+    if isinstance(instance, UserProfile):
+        return 'media/userprofiles/{userid}/{filename}/{filename_ext}'.format(userid=instance.user,filename=filename_no_ext, filename_ext = ext)
+
+
 class Book(models.Model):
  
     #There is an uploaded_by and author. This is because a user might want to upload a book they themselves did not write.
@@ -63,10 +57,11 @@ class Book(models.Model):
     bookID = models.AutoField(primary_key=True)
     book_category = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     book_title = models.CharField(max_length=128)
+    pdf_location = (str(book_title)+'.pdf')
     author = models.CharField(max_length=64)
     book_description = models.CharField(max_length=1024)
-    pdf_upload = models.FileField(upload_to = '')
-    uploaded_by = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
+    pdf_upload = models.FileField(upload_to = file_path)
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     book_date_published = models.DateField(auto_now=False, auto_now_add=True)
     book_average_rating = models.PositiveIntegerField(
         default = 1,
@@ -98,7 +93,7 @@ class Review(models.Model):
     
     reviewID = models.AutoField(primary_key=True)
     review_book = models.ForeignKey(Book, on_delete=models.CASCADE, null = True)
-    reviewer = models.ForeignKey(Users, on_delete=models.CASCADE, null = True)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     review_rating = models.IntegerField( 
         
         default = 1,
@@ -122,9 +117,9 @@ class Review(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_type = models.BooleanField(default=False)
-    user_picture = models.ImageField()  #change upload to file when its set up
+    user_picture = models.ImageField(upload_to=file_path)  
     bio = models.TextField(blank=True, default="hello, i'm on JOT!")
+    user_picture_file=str(user_picture)+'pdf'
 
     def __str__(self):
         return self.user.username
@@ -133,11 +128,12 @@ class UserProfile(models.Model):
         verbose_name = 'UserProfile'
         verbose_name_plural = 'UserProfiles'
 
-#This function just updates the related User Model when the UserProfile gets updated
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+#Below is not mines (Marks)
 
+#This function just updates the related User Model when the UserProfile gets updated
+#@receiver(post_save, sender=User)
+#def create_user_profile(sender, instance, created, **kwargs):
+#    if created:
+#        UserProfile.objects.create(user=instance)
 
 

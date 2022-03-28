@@ -1,35 +1,48 @@
-{% extends 'jot/base.html' %} {% load static %} {% block title_block %}
-{{ book.book_title }} {%endblock %} {% block body_block %}
-<h1 class="h1-title-block">{{ book.book_title }}</h1>
-<h3 class="h3-subtitle-block">{{ book.book_category }} by {{ book.author }}</h3>
-<p class="main-paragraph">{{ book.book_description }}</p>
-<div class="book-div">
-  <div class="book-link">
-    <a href="{{ book.book_file_path }}" target="_blank">{{ book.book_title }}</a>
-  </div>
-  <div class="download-symbol">
-    <a href="{{ book.pdf_upload }}" download><i class="fas fa-arrow-down"></i></a>
-  </div>
-</div>
+{% extends 'jot/base.html' %}
+{% load static %}
+{% block title_block %}
+{% if book %}
+  {{ book.book_title }}
+{% else %}
+  Book not Found!
+{% endif %}
+{%endblock %}
+{% block body_block %}
+  {% if book %}
+    <h1 class="h1-title-block">{{ book.book_title }}</h1>
+    <h3 class="h3-subtitle-block">{{ book.book_category }} by {{ book.author }}</h3>
+    <p class="main-paragraph">{{ book.book_description }}</p>
+    <div class="book-div">
+      <div class="book-link">
+        <a href="pdf/{{ book.bookID }}" target="_blank">{{ book.book_title }}</a>
+      </div>
+    </div>
 
-<div class="review-div">
-  <i class="fas fa-star fa-2x {{ star1 }}"></i>
-  <i class="fas fa-star fa-2x {{ star2 }}"></i>
-  <i class="fas fa-star fa-2x {{ star3 }}"></i>
-  <i class="fas fa-star fa-2x {{ star4 }}"></i>
-  <i class="fas fa-star fa-2x {{ star5 }}"></i>
-  ({{ total_reviews }})
-</div>
+    <div class="review-div">
+      <i class="fas fa-star fa-2x {{ star1 }}"></i>
+      <i class="fas fa-star fa-2x {{ star2 }}"></i>
+      <i class="fas fa-star fa-2x {{ star3 }}"></i>
+      <i class="fas fa-star fa-2x {{ star4 }}"></i>
+      <i class="fas fa-star fa-2x {{ star5 }}"></i>
+      ({{ total_reviews }})
+    </div>
 
-<div class="accordion">
-  <button type="button" class="accordion-button">Instructions</button>
-  <div class="accordion-content">
-    Click on the book title to be taken to another tab <br />
-    OR <br />
-    Click the download symbol (<i class="fas fa-arrow-down"></i>) <br />
-    Navigate to your downloads folder <br />
-    Click on the file icon called {{ book.pdf_upload }}
-  </div>
-  <script src="{% static 'javascript/script.js' %}"></script>
-</div>
-{% endblock %}
+    <div class="accordion">
+      <button type="button" class="accordion-button">Instructions</button>
+      <div class="accordion-content">
+        Click on the book title to be taken to another tab <br />
+        OR <br />
+        Click the download symbol (<i class="fas fa-arrow-down"></i>) <br />
+        Navigate to your downloads folder <br />
+        Click on the file icon called {{ book.pdf_upload }}
+      </div>
+      <script src="{% static 'javascript/script.js' %}"></script>
+    </div>
+  {% else %}
+    <br /><br /><br /><br /><br />
+    <h3 class="h3-subtitle-block">Error: Book not Found</h3>
+    <p class="main-paragraph">Uh oh! It looks like the book can't be found! Maybe it doesn't exist,
+      maybe it once did; but does no longer, maybe it will never exist.... Either way it definitely isn't
+      here so you can either <a href="{% url 'jot:surpriseme'%}">try a random book</a> or go back home by clicking on our shiny logo.
+  {% endif %}
+  {% endblock %}
