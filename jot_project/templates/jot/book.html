@@ -25,6 +25,7 @@
       <i class="fas fa-star fa-2x {{ star4 }}"></i>
       <i class="fas fa-star fa-2x {{ star5 }}"></i>
       ({{ total_reviews }})
+      <a href="{% url 'jot:review' book.bookID %}">See the Reviews</a>
     </div>
 
     <div class="accordion">

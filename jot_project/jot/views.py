@@ -71,7 +71,7 @@ def userpage(request, username):
         context_dict['user'] = None
 
     try:
-        context_dict['user_books'] = Book.objects.filter(author=user)
+        context_dict['user_books'] = Book.objects.filter(uploaded_by=user)
     except Book.DoesNotExist:
         context_dict['user_books'] = None
     
