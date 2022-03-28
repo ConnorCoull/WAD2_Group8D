@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title_block %}
-    user.username
+    {{ user.username }}
 {% endblock %}
 
 {% block body_block %}
@@ -10,7 +10,7 @@
         <div class="image-container" background="{{ user.user_picture }}">
             <!--<div class="profile-picture"></div>-->
         </div>
-        <div class="user-profile-information" background><h3 class="h3-subtitle-block">username</h3><br /><div id="bio-paragraph"><p class="main-paragraph">bio</p></div></div>
+        <div class="user-profile-information" background><h3 class="h3-subtitle-block">{{ user.username }}</h3><br /><div id="bio-paragraph"><p class="main-paragraph">{{ user.bio }}</p></div></div>
             <div class="user-books">
             {% if user_books %}
                 <ul class="user-books-list">
@@ -22,6 +22,7 @@
                 <h3 class="h3-subtitle-block">This user has no books</h3>
             {% endif %}
             </div>
+
         </div>
     {% else %}
         <h3 class="h3-subtitle-block">This user appears to not exist.... mysterious...</h3>
