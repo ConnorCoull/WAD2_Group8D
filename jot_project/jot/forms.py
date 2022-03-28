@@ -1,4 +1,3 @@
-from tokenize import blank_re
 from django import forms 
 from django.contrib.auth.models import User
 from jot.models import UserProfile,Book,Review
