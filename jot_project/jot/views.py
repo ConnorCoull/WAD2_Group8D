@@ -157,7 +157,7 @@ def review(request, pk):
     context_dict['visits'] = request.session['visits']
     return render(request, 'jot/review.html', context=context_dict)
 
-# If anyone want to change the page after uploading successfully, modify return redirect('book') 
+
 @login_required
 def upload_books(request):
     context_dict = {}
